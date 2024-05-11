@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: spring-boot-eureka
+  security:
+    user:
+      name: ${SPRING_SECURITY_USERNAME:admin}
+      password: ${SPRING_SECURITY_PASSWORD:admin}
+server:
+  port: ${PORT:8761}
+  servlet:
+    context-path: ${SERVER_CONTEXT_PATH:/}
+eureka:
+  server:
+    peer-node-read-timeout-ms: 3000
+  instance:
+    leaseRenewalIntervalInSeconds: 30
+    health-check-url-path: /actuator/health
+    metadata-map:
+      username: ${spring.security.user.name}
+      password: ${spring.security.user.password}
+  client:
+    registryFetchIntervalSeconds: 5
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVICE_URL:http://${spring.security.user.name}:${spring.security.user.password}@localhost:${server.port}/eureka/}
+management:
+  server:
+    port: ${MANAGEMENT_PORT:18761}
+  info:
+    env:
+      enabled: true
+    java:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+      cors:
+        allowed-origins: '*'
+        allowed-methods: '*'
+        max-age: 3600s
+    jmx:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
