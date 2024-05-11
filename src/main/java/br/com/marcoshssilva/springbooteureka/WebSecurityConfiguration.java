@@ -18,16 +18,23 @@ import java.util.List;
 @Configuration
 @EnableMethodSecurity()
 @EnableWebSecurity
+
+@lombok.extern.slf4j.Slf4j
 public class WebSecurityConfiguration {
 
     static final String[] AUTH_WHITELIST = { "/actuator/**" };
 
     @Bean
     public SecurityFilterChain securityFilterChainConfigure(HttpSecurity http) throws Exception {
+        log.info("Configured with enabled Cross-Origin-Resource-Sharing");
         http.cors(corsConfigurer -> corsConfigurer.configurationSource(corsConfigurationSource()));
+        log.info("Configured with disabled Csrf Tokens");
         http.csrf(CsrfConfigurer::disable);
+        log.info("Configured with disabled Sessions");
         http.sessionManagement(sessionConfigurer -> sessionConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        log.info("Configured with enabled path only to authenticated users");
         http.authorizeHttpRequests(httpRequestsConfigurer -> httpRequestsConfigurer.requestMatchers(AUTH_WHITELIST).permitAll().anyRequest().authenticated());
+        log.info("Configured with enabled authentication using Http Basic Auth");
         http.httpBasic(Customizer.withDefaults());
         return http.build();
     }
@@ -35,6 +42,7 @@ public class WebSecurityConfiguration {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
+        log.info("Setup cors with fully enabled Origins, Methods and Headers");
         configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowedMethods(List.of("*"));
         configuration.setAllowedHeaders(List.of("*"));
