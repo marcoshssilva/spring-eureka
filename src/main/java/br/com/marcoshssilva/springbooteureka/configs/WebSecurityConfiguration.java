@@ -1,4 +1,4 @@
-package br.com.marcoshssilva.springbooteureka;
+package br.com.marcoshssilva.springbooteureka.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
