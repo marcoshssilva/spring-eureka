@@ -1,5 +1,6 @@
 {
     "name": "Spring Boot Eureka Service Registry",
     "description": "Simple service discovery for Spring Apps",
-    "addons": []
+    "addons": [],
+    "image": "heroku/java"
 }
