@@ -3,7 +3,10 @@ pipelineUsingJava17AndMavenWithPublicDockerImage('marcoshssilva/spring-eureka',
     [
       'APP_NAME': 'spring-eureka',
       'DEPLOY': 'DOKKU',
-      'HOST': 'spring-eureka.starlord443.dev',
-      'USE_SSL': true
+      'USE_SSL': true,
+      'USE_LETSENCRYPT': false,
+      'SKIP_SONARQUBE': true,
+      'SKIP_NEXUS': true,
+      'SKIP_BUILDIMAGE': true
     ]
 )
