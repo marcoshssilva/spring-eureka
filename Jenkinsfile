@@ -4,6 +4,6 @@ pipelineUsingJava17AndMavenWithPublicDockerImage('marcoshssilva/spring-eureka',
         'APP_NAME': 'spring-eureka',
         'DEPLOY': 'DOKKU',
         'DOKKU_SELECTED_BUILDPACK': 'herokuish', // Options can be 'dockerfile', 'null' and DEFAULT 'herokuish'
-        'HOST': 'sp-cloud-eureka.starlord443.dev',
+        'HOST': 'spring-eureka.starlord443.dev',
     ],
 )
