@@ -2,6 +2,7 @@ package br.com.marcoshssilva.springbooteureka.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,7 +24,12 @@ public class WebSecurityConfiguration {
     public SecurityFilterChain securityFilterChainConfigure(HttpSecurity http) throws Exception {
         http.csrf(CsrfConfigurer::disable);
         http.sessionManagement(sessionConfigurer -> sessionConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        http.authorizeHttpRequests(httpRequestsConfigurer -> httpRequestsConfigurer.requestMatchers(AUTH_WHITELIST).permitAll().anyRequest().authenticated());
+        http.authorizeHttpRequests(
+                httpRequestsConfigurer -> httpRequestsConfigurer
+                        .requestMatchers(AUTH_WHITELIST).permitAll()
+                        .requestMatchers(HttpMethod.GET).permitAll()
+                        .anyRequest().authenticated()
+        );
         http.httpBasic(Customizer.withDefaults());
         return http.build();
     }
