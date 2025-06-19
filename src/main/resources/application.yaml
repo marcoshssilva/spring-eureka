@@ -29,10 +29,12 @@ management:
   server:
     port: ${MANAGEMENT_PORT:18761}
   info:
-    env:
+    defaults:
       enabled: true
-    java:
-      enabled: true
+#    env:
+#      enabled: true
+#    java:
+#      enabled: true
   endpoints:
     web:
       exposure:
