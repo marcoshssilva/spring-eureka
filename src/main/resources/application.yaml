@@ -31,21 +31,17 @@ management:
   info:
     defaults:
       enabled: true
-#    env:
-#      enabled: true
-#    java:
-#      enabled: true
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: 'health'
       cors:
-        allowed-origins: '*'
-        allowed-methods: '*'
-        max-age: 3600s
+        allowed-origins: ${CORS_ALLOWED_ORIGINS:'*'}
+        allowed-methods: ${CORS_ALLOWED_METHODS:'*'}
+        max-age: ${CORS_ALLOWED_MAXAGE:3600}
     jmx:
       exposure:
-        include: '*'
+        include: 'health'
   endpoint:
     health:
       show-details: always
