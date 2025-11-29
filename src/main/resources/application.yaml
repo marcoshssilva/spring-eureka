@@ -1,6 +1,6 @@
 spring:
   application:
-    name: spring-boot-eureka
+    name: ${APP_NAME:spring-cloud-eureka}
   security:
     user:
       name: ${SPRING_SECURITY_USERNAME:admin}
