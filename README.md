@@ -1,1 +1,1 @@
-# spring-boot-eureka
+# Spring-Cloud-Eureka
