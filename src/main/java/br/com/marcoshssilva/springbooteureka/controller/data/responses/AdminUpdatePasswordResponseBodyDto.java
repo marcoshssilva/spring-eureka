@@ -1,4 +1,4 @@
-package br.com.marcoshssilva.springbooteureka.http.responses;
+package br.com.marcoshssilva.springbooteureka.controller.data.responses;
 
 import java.io.Serializable;
 import java.util.Objects;
