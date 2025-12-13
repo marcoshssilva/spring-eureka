@@ -1,7 +1,9 @@
 package br.com.marcoshssilva.springbooteureka.controller.exceptions;
 
+import java.io.Serializable;
+
 public class BadRequestException extends ErrorException {
-    public BadRequestException(Object responseBody) {
+    public BadRequestException(Serializable responseBody) {
         super(responseBody);
     }
 }
