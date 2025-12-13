@@ -1,5 +1,7 @@
 # spring-boot-eureka
 
+Eureka service discovery to Spring Boot Apps and supported as NodeJS, Quarkus, Micrometer or FastAPI
+
 ## Initial Username and Password
 
 You can log using initial user **admin** with credentials **admin**
