@@ -8,8 +8,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
@@ -31,14 +31,9 @@ public class WebSecurityConfiguration {
 
     static final String[] ALLOW_BY_ROLE_METRICS = { "/actuator/**" };
     static final String[] ALLOW_BY_ROLE_CLIENT = { "/eureka/v2/apps", "/eureka/v2/apps/**" };
-    static final String[] ALLOW_BY_ROLE_READER = { "/" };
-    static final String[] ALLOW_BY_ROLE_ADMIN  = { "/api/admin/**", "/h2-console" };
-
-    @Primary()
-    @Bean
-    public UserDetailsService defaultUserDetailsServiceBean(DataSource dataSource) {
-        return new JdbcUserDetailsManager(dataSource);
-    }
+    static final String[] ALLOW_BY_ROLE_READER = { "/", "/lastn" };
+    static final String[] ALLOW_BY_ROLE_ADMIN  = { "/api/admin/**", "/h2-console/**" };
+    static final String[] PUBLIC_ROUTES = { "/favicon.ico", "/eureka/css/**", "/eureka/js/**", "/eureka/fonts/**", "/eureka/images/**" };
 
     @Primary
     @Bean
@@ -55,10 +50,12 @@ public class WebSecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChainConfigure(HttpSecurity http) throws Exception {
         http.httpBasic(Customizer.withDefaults());
-        http.sessionManagement(sessionConfigurer -> sessionConfigurer.sessionCreationPolicy(SessionCreationPolicy.NEVER));
+        http.sessionManagement(sessionConfigurer -> sessionConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
         http.csrf(CsrfConfigurer::disable);
         http.authorizeHttpRequests(
                 httpRequestsConfigurer -> httpRequestsConfigurer
+                        .requestMatchers(PUBLIC_ROUTES).permitAll()
                         .requestMatchers(ALLOW_BY_ROLE_ADMIN).hasAnyRole(ROLE_ADMIN)
                         .requestMatchers(ALLOW_BY_ROLE_CLIENT).hasAnyRole(ROLE_CLIENT, ROLE_ADMIN)
                         .requestMatchers(ALLOW_BY_ROLE_READER).hasAnyRole(ROLE_READER, ROLE_ADMIN)
