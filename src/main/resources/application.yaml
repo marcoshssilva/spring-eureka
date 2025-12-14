@@ -71,3 +71,7 @@ management:
         step: 1m
     tracing:
       endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/traces
+logging:
+  level:
+    com.netflix.eureka: OFF
+    com.netflix.discovery: OFF
