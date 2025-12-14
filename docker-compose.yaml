@@ -3,6 +3,7 @@ volumes:
 services:
   app:
     container_name: 'spring-eureka'
+    restart: unless-stopped
     build:
       dockerfile: ./Dockerfile
       context: ./
