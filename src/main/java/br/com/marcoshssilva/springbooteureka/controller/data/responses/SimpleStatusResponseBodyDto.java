@@ -3,12 +3,12 @@ package br.com.marcoshssilva.springbooteureka.controller.data.responses;
 import java.io.Serializable;
 import java.util.Objects;
 
-public record AdminUpdatePasswordResponseBodyDto(String message, String status) implements Serializable {
+public record SimpleStatusResponseBodyDto(String message, String status) implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AdminUpdatePasswordResponseBodyDto that = (AdminUpdatePasswordResponseBodyDto) o;
+        SimpleStatusResponseBodyDto that = (SimpleStatusResponseBodyDto) o;
         return Objects.equals(message, that.message) && Objects.equals(status, that.status);
     }
 
