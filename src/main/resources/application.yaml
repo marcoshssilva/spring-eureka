@@ -57,3 +57,16 @@ management:
       show-values: when_authorized
     env:
       show-values: when_authorized
+  tracing:
+    sampling:
+      probability: 1.0
+  otlp:
+    metrics:
+      export:
+        url: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/metrics
+        batchSize: 10000
+        aggregationTemporality: cumulative
+        step: 1m
+        enabled: ${MANAGEMENT_OTLP_METRICS_EXPORT_ENABLED:true}
+    tracing:
+      endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/traces
