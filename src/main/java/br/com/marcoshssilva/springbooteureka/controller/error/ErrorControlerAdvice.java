@@ -1,5 +1,6 @@
 package br.com.marcoshssilva.springbooteureka.controller.error;
 
+import br.com.marcoshssilva.springbooteureka.controller.data.etc.StatusTypeResponse;
 import br.com.marcoshssilva.springbooteureka.controller.data.responses.ErrorStatusResponseBodyDto;
 import br.com.marcoshssilva.springbooteureka.controller.data.responses.SimpleStatusResponseBodyDto;
 import br.com.marcoshssilva.springbooteureka.controller.exceptions.BadRequestException;
@@ -27,12 +28,12 @@ public class ErrorControlerAdvice {
 
     @ExceptionHandler(HttpMessageConversionException.class)
     public ResponseEntity<Object> httpMessageConversionExceptionResolver(HttpMessageConversionException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new SimpleStatusResponseBodyDto("Invalid or corrupted payload", "ERROR"));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new SimpleStatusResponseBodyDto("Invalid or corrupted payload", StatusTypeResponse.ERROR));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Object> validationExceptionResolver(MethodArgumentNotValidException e) {
-        ErrorStatusResponseBodyDto err = new ErrorStatusResponseBodyDto("Invalid argument data in payload.", e.getFieldErrors().stream().map(fieldError -> new ErrorStatusResponseBodyDto.ErrorField(fieldError.getField(), fieldError.getDefaultMessage(), fieldError.getRejectedValue())).collect(Collectors.toSet()), "ERROR");
+        ErrorStatusResponseBodyDto err = new ErrorStatusResponseBodyDto("Invalid argument data in payload.", e.getFieldErrors().stream().map(fieldError -> new ErrorStatusResponseBodyDto.ErrorField(fieldError.getField(), fieldError.getDefaultMessage(), fieldError.getRejectedValue())).collect(Collectors.toSet()), StatusTypeResponse.ERROR);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 }

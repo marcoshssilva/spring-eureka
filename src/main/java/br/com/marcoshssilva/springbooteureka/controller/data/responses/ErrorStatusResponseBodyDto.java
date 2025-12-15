@@ -1,10 +1,12 @@
 package br.com.marcoshssilva.springbooteureka.controller.data.responses;
 
+import br.com.marcoshssilva.springbooteureka.controller.data.etc.StatusTypeResponse;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 
-public record ErrorStatusResponseBodyDto(String message, Collection<ErrorField> errors, String status) implements Serializable {
+public record ErrorStatusResponseBodyDto(String message, Collection<ErrorField> errors, StatusTypeResponse status) implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
