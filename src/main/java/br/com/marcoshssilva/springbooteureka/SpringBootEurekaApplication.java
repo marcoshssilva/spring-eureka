@@ -5,10 +5,8 @@ import br.com.marcoshssilva.springbooteureka.domain.tasks.InitSuperUserIfNotExis
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 @lombok.RequiredArgsConstructor
-@EnableEurekaServer
 @SpringBootApplication
 public class SpringBootEurekaApplication implements CommandLineRunner {
 	private final InitSuperUserIfNotExistsTask initSuperUserIfNotExistsTask;
