@@ -8,7 +8,6 @@ import br.com.marcoshssilva.springbooteureka.domain.services.UserControllerServi
 import br.com.marcoshssilva.springbooteureka.controller.data.requests.AdminUpdatePasswordRequestBodyDto;
 import br.com.marcoshssilva.springbooteureka.controller.data.responses.SimpleStatusResponseBodyDto;
 import jakarta.validation.Valid;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

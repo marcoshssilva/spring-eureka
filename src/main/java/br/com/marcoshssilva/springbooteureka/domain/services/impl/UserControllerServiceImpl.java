@@ -8,7 +8,6 @@ import br.com.marcoshssilva.springbooteureka.domain.repositories.RoleRepository;
 import br.com.marcoshssilva.springbooteureka.domain.repositories.UserRepository;
 import br.com.marcoshssilva.springbooteureka.domain.services.UserControllerService;
 import org.springframework.context.annotation.Primary;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
