@@ -20,6 +20,8 @@ server:
   servlet:
     context-path: ${SERVER_CONTEXT_PATH:/}
 eureka:
+  datacenter: 'local'
+  environment: 'development'
   server:
     peer-node-read-timeout-ms: 3000
   instance:
