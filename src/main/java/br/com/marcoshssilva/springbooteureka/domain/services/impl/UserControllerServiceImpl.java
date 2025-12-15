@@ -24,8 +24,8 @@ public class UserControllerServiceImpl implements UserControllerService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public void resetPasswordFromUsername(final String username, final String newPassword) {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username not found in database"));
+    public void resetPasswordFromUsername(final String username, final String newPassword) throws BusinessException {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new BusinessException("Username not found in database"));
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
     }

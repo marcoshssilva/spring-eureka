@@ -27,7 +27,7 @@ public class AdminController {
         try {
             userControllerService.resetPasswordFromUsername(body.username(), body.newPassword());
             return new SimpleStatusResponseBodyDto("Password has been changed.", "SUCCESS");
-        } catch (UsernameNotFoundException e) {
+        } catch (BusinessException e) {
             throw new BadRequestException(new SimpleStatusResponseBodyDto(e.getMessage(), "ERROR"));
         } catch (Exception e) {
             throw new InternalServerErrorException(new SimpleStatusResponseBodyDto("Internal server error", "ERROR"));
