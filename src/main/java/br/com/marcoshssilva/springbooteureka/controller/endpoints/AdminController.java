@@ -23,7 +23,7 @@ public class AdminController {
 
     @Transactional
     @PostMapping("/reset-password")
-    SimpleStatusResponseBodyDto resetPasswordAccount(@RequestBody AdminUpdatePasswordRequestBodyDto body) {
+    SimpleStatusResponseBodyDto resetPasswordAccount(@RequestBody @Valid AdminUpdatePasswordRequestBodyDto body) {
         try {
             userControllerService.resetPasswordFromUsername(body.username(), body.newPassword());
             return new SimpleStatusResponseBodyDto("Password has been changed.", "SUCCESS");
