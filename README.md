@@ -18,3 +18,15 @@ Example:
    -d '{ "username": "admin", "newPassword": "PUT_YOUR_NEW_PASSWORD_HERE" }' \
    -v
 ```
+
+## Create new user using REST API
+
+Endpoint: `/api/admin/create-user`
+
+```
+curl -X 'POST' http://localhost:8761/api/admin/create-user \
+   -H 'Content-type: application/json' \
+   -H 'Authorization: Basic YWRtaW46YWRtaW4=' \
+   -d '{ "username": "YOUR_USERNAME", "password": "YOUR_PASSWORD", "enabled": "true", "roles": ["ADMIN", "READER"] }' \
+   -v
+```
