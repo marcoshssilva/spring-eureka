@@ -9,8 +9,8 @@ import java.util.Objects;
 @lombok.AllArgsConstructor
 @lombok.NoArgsConstructor
 @lombok.Data
-@Entity
-@Table(name = "group_members")
+// @Entity
+// @Table(name = "group_members")
 public class MemberGroup {
     @EmbeddedId
     private MemberGroupPK id;

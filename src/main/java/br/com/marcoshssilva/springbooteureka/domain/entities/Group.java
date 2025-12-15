@@ -7,8 +7,8 @@ import java.util.Objects;
 @lombok.AllArgsConstructor
 @lombok.NoArgsConstructor
 @lombok.Data
-@Entity
-@Table(name = "groups")
+// @Entity
+// @Table(name = "groups")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

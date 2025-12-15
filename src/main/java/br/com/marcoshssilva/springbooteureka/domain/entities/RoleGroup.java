@@ -9,8 +9,8 @@ import java.util.Objects;
 @lombok.AllArgsConstructor
 @lombok.NoArgsConstructor
 @lombok.Data
-@Entity
-@Table(name = "group_authorities")
+// @Entity
+// @Table(name = "group_authorities")
 public class RoleGroup {
     @EmbeddedId
     RoleGroupPK id;
