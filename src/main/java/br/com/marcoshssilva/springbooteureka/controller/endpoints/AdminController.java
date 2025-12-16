@@ -52,8 +52,21 @@ public class AdminController {
     @PostMapping("/update-user")
     SimpleStatusResponseBodyDto updateUser(@RequestBody @Valid AdminUpdateUserRequestBodyDto body) {
         try {
-            userManagementService.updateUser(body.username(), body.newPassword(), body.roles());
+            userManagementService.updateUser(body.username(), body.roles());
             return new SimpleStatusResponseBodyDto(MSG_USER_UPDATED, StatusTypeResponse.SUCCESS);
+        } catch (BusinessException e) {
+            throw new BadRequestException(new SimpleStatusResponseBodyDto(e.getMessage(), StatusTypeResponse.ERROR));
+        } catch (Exception e) {
+            throw new InternalServerErrorException(new SimpleStatusResponseBodyDto(MSG_INTERNAL_SERVER_ERROR, StatusTypeResponse.ERROR));
+        }
+    }
+
+    @Transactional
+    @PostMapping("/change-password")
+    SimpleStatusResponseBodyDto changePassword(@RequestBody @Valid AdminChangePasswordRequestBodyDto body) {
+        try {
+            userManagementService.changePasswordFromUsername(body.username(), body.newPassword(), body.oldPassword());
+            return new SimpleStatusResponseBodyDto(MSG_PASSWORD_CHANGED, StatusTypeResponse.SUCCESS);
         } catch (BusinessException e) {
             throw new BadRequestException(new SimpleStatusResponseBodyDto(e.getMessage(), StatusTypeResponse.ERROR));
         } catch (Exception e) {

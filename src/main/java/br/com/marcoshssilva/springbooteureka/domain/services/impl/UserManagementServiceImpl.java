@@ -23,6 +23,7 @@ import java.util.stream.Stream;
 public final class UserManagementServiceImpl implements UserManagementService {
     private static final String MSG_USERNAME_NOT_FOUND = "Username not found in database";
     private static final String MSG_USERNAME_ALREADY_EXISTS = "Username already exists in database.";
+    private static final String MSG_PASSWORD_DOESNT_MATCH = "Password doesn't match. Check credentials.";
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -50,9 +51,8 @@ public final class UserManagementServiceImpl implements UserManagementService {
     }
 
     @Override
-    public User updateUser(final String username, final String newPassword, final String[] roles) throws BusinessException {
+    public User updateUser(final String username, final String[] roles) throws BusinessException {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new BusinessException(MSG_USERNAME_NOT_FOUND));
-        user.setPassword(passwordEncoder.encode(newPassword));
         Set<Role> newRoles = Arrays.stream(roles).map(role -> new Role(new RolePK(username, role))).collect(Collectors.toSet());
         Set<Role> oldSet = roleRepository.findAllByUsername(username);
 
@@ -60,6 +60,17 @@ public final class UserManagementServiceImpl implements UserManagementService {
         roleRepository.saveAll(newRoles);
 
         return userRepository.save(user);
+    }
+
+    @Override
+    public void changePasswordFromUsername(final String username, final String newPassword, final String oldPassword) throws BusinessException {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new BusinessException(MSG_USERNAME_NOT_FOUND));
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+            throw new BusinessException(MSG_PASSWORD_DOESNT_MATCH);
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
     }
 
     @Override
