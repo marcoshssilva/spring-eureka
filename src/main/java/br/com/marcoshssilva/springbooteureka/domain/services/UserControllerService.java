@@ -8,4 +8,8 @@ import org.springframework.stereotype.Service;
 public interface UserControllerService {
     void resetPasswordFromUsername(final String username, final String newPassword) throws BusinessException;
     User createUser(final String username, final String password, Boolean enabled, String[] roles) throws BusinessException;
+    User updateUser(final String username, final String newPassword, final String[] roles) throws BusinessException;
+    void deleteUser(final String username) throws BusinessException;
+    void enableUser(final String username) throws BusinessException;
+    void disableUser(final String username) throws BusinessException;
 }

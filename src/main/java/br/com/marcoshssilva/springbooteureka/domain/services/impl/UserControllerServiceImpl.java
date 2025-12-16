@@ -11,29 +11,35 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Primary
 @Service
 @lombok.RequiredArgsConstructor
-public class UserControllerServiceImpl implements UserControllerService {
+public final class UserControllerServiceImpl implements UserControllerService {
+    private static final String MSG_USERNAME_NOT_FOUND = "Username not found in database";
+    private static final String MSG_USERNAME_ALREADY_EXISTS = "Username already exists in database.";
+
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public void resetPasswordFromUsername(final String username, final String newPassword) throws BusinessException {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new BusinessException("Username not found in database"));
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new BusinessException(MSG_USERNAME_NOT_FOUND));
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
     }
 
     @Override
-    public User createUser(String username, String password, Boolean enabled, String[] roles) throws BusinessException {
+    public User createUser(final String username, final String password, final Boolean enabled, final String[] roles) throws BusinessException {
         Optional<User> usernameSearch = userRepository.findByUsername(username);
         if (usernameSearch.isPresent()) {
-            throw new BusinessException("Username already exists in database.");
+            throw new BusinessException(MSG_USERNAME_ALREADY_EXISTS);
         }
 
         User user = new User(username, passwordEncoder.encode(password), enabled);
@@ -41,5 +47,37 @@ public class UserControllerServiceImpl implements UserControllerService {
         Stream.of(roles).forEach(role -> roleRepository.save(new Role(new RolePK(user.getUsername(), role))));
 
         return user;
+    }
+
+    @Override
+    public User updateUser(final String username, final String newPassword, final String[] roles) throws BusinessException {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new BusinessException(MSG_USERNAME_NOT_FOUND));
+        user.setPassword(passwordEncoder.encode(newPassword));
+        Set<Role> newRoles = Arrays.stream(roles).map(role -> new Role(new RolePK(username, role))).collect(Collectors.toSet());
+        Set<Role> oldSet = roleRepository.findAllByUsername(username);
+
+        roleRepository.deleteAll(oldSet);
+        roleRepository.saveAll(newRoles);
+
+        return userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUser(final String username) throws BusinessException {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new BusinessException(MSG_USERNAME_NOT_FOUND));
+        roleRepository.deleteAllById_Username(username);
+        userRepository.delete(user);
+    }
+
+    @Override
+    public void enableUser(final String username) throws BusinessException {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new BusinessException(MSG_USERNAME_NOT_FOUND));
+        user.setEnabled(Boolean.TRUE);
+    }
+
+    @Override
+    public void disableUser(final String username) throws BusinessException {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new BusinessException(MSG_USERNAME_NOT_FOUND));
+        user.setEnabled(Boolean.FALSE);
     }
 }
