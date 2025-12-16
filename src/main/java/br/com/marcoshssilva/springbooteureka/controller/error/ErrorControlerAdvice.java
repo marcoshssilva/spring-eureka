@@ -8,6 +8,7 @@ import br.com.marcoshssilva.springbooteureka.controller.exceptions.InternalServe
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConversionException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -39,7 +40,12 @@ public class ErrorControlerAdvice {
     }
 
     @ExceptionHandler(NoResourceFoundException.class)
-    public ResponseEntity<Object> noResourceFoundException(NoResourceFoundException e) {
+    public ResponseEntity<Object> noResourceFoundExceptionResolver(NoResourceFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new SimpleStatusResponseBodyDto(e.getMessage(), StatusTypeResponse.ERROR));
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<Object> methodNotSupportedExceptionResolver(HttpRequestMethodNotSupportedException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new SimpleStatusResponseBodyDto(e.getMessage(), StatusTypeResponse.ERROR));
     }
 }
