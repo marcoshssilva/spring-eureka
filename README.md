@@ -6,7 +6,19 @@ Eureka service discovery to Spring Boot Apps and supported as NodeJS, Quarkus, M
 
 You can log using initial user **admin** with credentials **admin**
 
-## Reset password using REST API
+## Change own password
+
+Endpoint: `/api/user/change-password`
+```
+ curl -X 'POST' http://localhost:8761/api/user/change-password \
+   -H 'Content-type: application/json' \
+   -H 'Authorization: Basic YWRtaW46YWRtaW4=' \
+   -d '{ "oldPassword": "YOUR_PASSWORD", "newPassword": "YOUR_NEW_PASSWORD" }' \
+   -v
+
+```
+
+## Reset password using REST API as ROLE ADMIN
 
 Endpoint: `/api/admin/reset-password`
 ```
@@ -17,7 +29,7 @@ Endpoint: `/api/admin/reset-password`
    -v
 ```
 
-## Create new user using REST API
+## Create new user using REST API as ROLE ADMIN
 
 Endpoint: `/api/admin/create-user`
 ```
@@ -28,7 +40,7 @@ curl -X 'POST' http://localhost:8761/api/admin/create-user \
    -v
 ```
 
-## Update user using REST API
+## Update user using REST API as ROLE ADMIN
 
 Endpoint: `/api/admin/update-user`
 ```
@@ -39,7 +51,7 @@ curl -X 'POST' http://localhost:8761/api/admin/update-user \
    -v
 ```
 
-## Delete user using REST API
+## Delete user using REST API as ROLE ADMIN
 
 Endpoint: `/api/admin/delete-user/{username}`
 
@@ -49,7 +61,7 @@ curl -X 'DELETE' http://localhost:8761/api/admin/delete-user/{username} \
    -H 'Authorization: Basic YWRtaW46YWRtaW4=' \
    -v
 ```
-## Enable user using REST API
+## Enable user using REST API as ROLE ADMIN
 
 Endpoint: `/api/admin/enable-user/{username}`
 ```
@@ -59,7 +71,7 @@ curl -X 'PUT' http://localhost:8761/api/admin/enable-user/{username} \
    -v
 ```
 
-## Disable user using REST API
+## Disable user using REST API as ROLE ADMIN
 
 Endpoint: `/api/admin/disable-user/{username}`
 ```
