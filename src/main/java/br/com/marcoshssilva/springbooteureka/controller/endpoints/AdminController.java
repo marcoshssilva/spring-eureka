@@ -42,15 +42,6 @@ public class AdminController extends AbstractApiController {
     }
 
     @Transactional
-    @PostMapping("/change-password")
-    SimpleStatusResponseBodyDto changePassword(@RequestBody @Valid AdminChangePasswordRequestBodyDto body) {
-        return processRequest(() -> {
-            userManagementService.changePasswordFromUsername(body.username(), body.newPassword(), body.oldPassword());
-            return new SimpleStatusResponseBodyDto(MSG_PASSWORD_CHANGED, StatusTypeResponse.SUCCESS);
-        });
-    }
-
-    @Transactional
     @DeleteMapping("/delete-user/{username}")
     SimpleStatusResponseBodyDto updateUser(@PathVariable String username) {
         return processRequest(() -> {
