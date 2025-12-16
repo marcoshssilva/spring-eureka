@@ -1,9 +1,6 @@
 package br.com.marcoshssilva.springbooteureka.domain.entities;
 
 import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-
 import java.util.Objects;
 
 @lombok.AllArgsConstructor
