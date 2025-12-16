@@ -1,5 +1,6 @@
 package br.com.marcoshssilva.springbooteureka.controller.data.requests;
 
+import br.com.marcoshssilva.springbooteureka.controller.data.etc.UserRoles;
 import jakarta.validation.constraints.*;
 
 import java.io.Serializable;
@@ -15,7 +16,7 @@ public record AdminUpdateUserRequestBodyDto(
         @NotNull(message = "Field cannot be null or empty")
         @NotEmpty(message = "Field cannot be null or empty")
         @Size(min = 1, max = 12, message = "Must contain at least 1 and max 12")
-        String[] roles
+        UserRoles[] roles
 
 ) implements Serializable {
     @Override
