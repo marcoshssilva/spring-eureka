@@ -6,11 +6,7 @@ import br.com.marcoshssilva.springbooteureka.controller.data.responses.SimpleSta
 import br.com.marcoshssilva.springbooteureka.controller.exceptions.BadRequestException;
 import br.com.marcoshssilva.springbooteureka.controller.exceptions.InternalServerErrorException;
 import br.com.marcoshssilva.springbooteureka.domain.exceptions.BusinessException;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/api")
 public abstract class AbstractApiController {
     protected static final String MSG_INTERNAL_SERVER_ERROR = "Internal server error.";
     protected static final String MSG_PASSWORD_CHANGED = "Password has been changed.";

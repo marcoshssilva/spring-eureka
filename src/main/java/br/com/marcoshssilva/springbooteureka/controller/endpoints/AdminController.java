@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @lombok.RequiredArgsConstructor
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/api/admin")
 public class AdminController extends AbstractApiController {
     private final UserManagementService userManagementService;
 
