@@ -5,7 +5,7 @@ import br.com.marcoshssilva.springbooteureka.controller.data.requests.AdminCreat
 import br.com.marcoshssilva.springbooteureka.controller.exceptions.BadRequestException;
 import br.com.marcoshssilva.springbooteureka.controller.exceptions.InternalServerErrorException;
 import br.com.marcoshssilva.springbooteureka.domain.exceptions.BusinessException;
-import br.com.marcoshssilva.springbooteureka.domain.services.UserControllerService;
+import br.com.marcoshssilva.springbooteureka.domain.services.UserManagementService;
 import br.com.marcoshssilva.springbooteureka.controller.data.requests.AdminUpdatePasswordRequestBodyDto;
 import br.com.marcoshssilva.springbooteureka.controller.data.responses.SimpleStatusResponseBodyDto;
 import jakarta.validation.Valid;
@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/admin")
 public class AdminController {
-    private final UserControllerService userControllerService;
+    private final UserManagementService userManagementService;
 
     @Transactional
     @PostMapping("/reset-password")
     SimpleStatusResponseBodyDto resetPasswordAccount(@RequestBody @Valid AdminUpdatePasswordRequestBodyDto body) {
         try {
-            userControllerService.resetPasswordFromUsername(body.username(), body.newPassword());
+            userManagementService.resetPasswordFromUsername(body.username(), body.newPassword());
             return new SimpleStatusResponseBodyDto("Password has been changed.", StatusTypeResponse.SUCCESS);
         } catch (BusinessException e) {
             throw new BadRequestException(new SimpleStatusResponseBodyDto(e.getMessage(), StatusTypeResponse.ERROR));
@@ -38,7 +38,7 @@ public class AdminController {
     @PostMapping("/create-user")
     SimpleStatusResponseBodyDto createUser(@RequestBody @Valid AdminCreateUserRequestBodyDto body) {
         try {
-            userControllerService.createUser(body.username(), body.password(), body.enabled(), body.roles());
+            userManagementService.createUser(body.username(), body.password(), body.enabled(), body.roles());
             return new SimpleStatusResponseBodyDto("User created with success", StatusTypeResponse.SUCCESS);
         } catch (BusinessException e) {
             throw new BadRequestException(new SimpleStatusResponseBodyDto(e.getMessage(), StatusTypeResponse.ERROR));

@@ -6,7 +6,7 @@ import br.com.marcoshssilva.springbooteureka.domain.entities.User;
 import br.com.marcoshssilva.springbooteureka.domain.exceptions.BusinessException;
 import br.com.marcoshssilva.springbooteureka.domain.repositories.RoleRepository;
 import br.com.marcoshssilva.springbooteureka.domain.repositories.UserRepository;
-import br.com.marcoshssilva.springbooteureka.domain.services.UserControllerService;
+import br.com.marcoshssilva.springbooteureka.domain.services.UserManagementService;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 @Primary
 @Service
 @lombok.RequiredArgsConstructor
-public final class UserControllerServiceImpl implements UserControllerService {
+public final class UserManagementServiceImpl implements UserManagementService {
     private static final String MSG_USERNAME_NOT_FOUND = "Username not found in database";
     private static final String MSG_USERNAME_ALREADY_EXISTS = "Username already exists in database.";
 
@@ -73,11 +73,13 @@ public final class UserControllerServiceImpl implements UserControllerService {
     public void enableUser(final String username) throws BusinessException {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new BusinessException(MSG_USERNAME_NOT_FOUND));
         user.setEnabled(Boolean.TRUE);
+        userRepository.save(user);
     }
 
     @Override
     public void disableUser(final String username) throws BusinessException {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new BusinessException(MSG_USERNAME_NOT_FOUND));
         user.setEnabled(Boolean.FALSE);
+        userRepository.save(user);
     }
 }
