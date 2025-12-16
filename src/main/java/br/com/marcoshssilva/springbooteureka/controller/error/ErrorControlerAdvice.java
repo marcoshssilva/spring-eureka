@@ -11,6 +11,7 @@ import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.util.stream.Collectors;
 
@@ -35,5 +36,10 @@ public class ErrorControlerAdvice {
     public ResponseEntity<Object> validationExceptionResolver(MethodArgumentNotValidException e) {
         ErrorStatusResponseBodyDto err = new ErrorStatusResponseBodyDto("Invalid argument data in payload.", e.getFieldErrors().stream().map(fieldError -> new ErrorStatusResponseBodyDto.ErrorField(fieldError.getField(), fieldError.getDefaultMessage(), fieldError.getRejectedValue())).collect(Collectors.toSet()), StatusTypeResponse.ERROR);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+    }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<Object> noResourceFoundException(NoResourceFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new SimpleStatusResponseBodyDto(e.getMessage(), StatusTypeResponse.ERROR));
     }
 }
