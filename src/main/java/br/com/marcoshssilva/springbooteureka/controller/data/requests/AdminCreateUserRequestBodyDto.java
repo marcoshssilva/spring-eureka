@@ -3,10 +3,11 @@ package br.com.marcoshssilva.springbooteureka.controller.data.requests;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
-public record AdminCreateUserRequestBodyDto(@NotBlank String username, @NotBlank String password, @NotNull Boolean enabled, @NotNull String[] roles) {
+public record AdminCreateUserRequestBodyDto(@NotBlank String username, @NotBlank String password, @NotNull Boolean enabled, @NotNull String[] roles) implements Serializable {
     @Override
     public String toString() {
         return "AdminCreateUserRequestBodyDto{" +
