@@ -7,18 +7,18 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
-public record AdminUpdateUserRequestBodyDto(@NotBlank String username, @NotBlank String newPassword, @NotNull String[] roles) implements Serializable {
+public record AdminUpdateUserRequestBodyDto(@NotBlank String username, @NotNull String[] roles) implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AdminUpdateUserRequestBodyDto that = (AdminUpdateUserRequestBodyDto) o;
-        return Objects.equals(username, that.username) && Objects.equals(newPassword, that.newPassword) && Arrays.equals(roles, that.roles);
+        return Objects.equals(username, that.username) && Arrays.equals(roles, that.roles);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(username, newPassword);
+        int result = Objects.hash(username);
         result = 31 * result + Arrays.hashCode(roles);
         return result;
     }
@@ -27,7 +27,6 @@ public record AdminUpdateUserRequestBodyDto(@NotBlank String username, @NotBlank
     public String toString() {
         return "AdminUpdateUserRequestBodyDto{" +
                 "username='" + username + '\'' +
-                ", newPassword='" + newPassword + '\'' +
                 ", roles=" + Arrays.toString(roles) +
                 '}';
     }
