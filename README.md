@@ -2,6 +2,15 @@
 
 Eureka service discovery to Spring Boot Apps and supported as NodeJS, Quarkus, Micrometer or FastAPI
 
+## Roles
+
+| Role    | Description                                                   |
+|---------|---------------------------------------------------------------|
+| READER  | User enabled to open Eureka Dashboard only                    |
+| METRICS | User enabled to requests actuator endpoints only              |
+| ADMIN   | User enabled to admin user and make request to any endpoint   |
+| CLIENT  | User enabled to register and fetch data from Eureka as client |
+
 ## Initial Username and Password
 
 You can log using initial user **admin** with credentials **admin**
