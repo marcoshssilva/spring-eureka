@@ -2,6 +2,10 @@
 
 Eureka service discovery to Spring Boot Apps and supported as NodeJS, Quarkus, Micrometer or FastAPI
 
+[![Quality gate](https://qsonar.starlord443.dev/api/project_badges/quality_gate?project=marcoshssilva-spring-eureka)](https://qsonar.starlord443.dev/dashboard?id=marcoshssilva-spring-eureka)
+
+Link to SonarQube project [spring-eureka](https://qsonar.starlord443.dev/project/information?id=marcoshssilva-spring-eureka)
+
 ## Roles
 
 | Role    | Description                                                   |
