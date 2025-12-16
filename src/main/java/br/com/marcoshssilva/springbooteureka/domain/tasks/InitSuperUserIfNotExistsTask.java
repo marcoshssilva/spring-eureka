@@ -1,5 +1,6 @@
 package br.com.marcoshssilva.springbooteureka.domain.tasks;
 
+import br.com.marcoshssilva.springbooteureka.controller.data.etc.UserRoles;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -13,7 +14,7 @@ import java.util.concurrent.CompletableFuture;
 public class InitSuperUserIfNotExistsTask {
     private static final String DEFAULT_HASH_PASSWORD = "$100801$9aSNEKS2azINKKadHUU5sw==$yA18DF/L2PnKPplJhMLm5Z7JhAT2TAQPq0PipdxjDxU=";
     private static final String DEFAULT_USERNAME = "admin";
-    private static final String DEFAULT_ROLE = "ADMIN";
+    private static final String DEFAULT_ROLE = UserRoles.ADMIN.getAuthority();
 
 
     private final UserDetailsManager userDetailsManager;

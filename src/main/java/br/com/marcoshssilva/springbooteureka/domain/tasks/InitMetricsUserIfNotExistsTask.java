@@ -1,5 +1,6 @@
 package br.com.marcoshssilva.springbooteureka.domain.tasks;
 
+import br.com.marcoshssilva.springbooteureka.controller.data.etc.UserRoles;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.User;
@@ -13,7 +14,7 @@ import java.util.concurrent.CompletableFuture;
 @lombok.extern.slf4j.Slf4j
 @Component
 public class InitMetricsUserIfNotExistsTask {
-    private static final String DEFAULT_ROLE = "METRICS";
+    private static final String DEFAULT_ROLE = UserRoles.METRICS.getAuthority();
 
     @Value("${eureka.instance.metadata-map.username}")
     String metricsUsername = "metrics";
