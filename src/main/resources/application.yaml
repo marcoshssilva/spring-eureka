@@ -77,6 +77,12 @@ management:
         step: 1m
     tracing:
       endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/traces
+      export:
+        enabled: ${MANAGEMENT_OTLP_TRACING_EXPORT_ENABLED:true}
+    logging:
+      endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/logs
+      export:
+        enabled: ${MANAGEMENT_OTLP_LOGGING_EXPORT_ENABLED:true}
 logging:
   level:
     com.netflix.eureka: OFF
