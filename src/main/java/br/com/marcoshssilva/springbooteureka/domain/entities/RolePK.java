@@ -26,12 +26,12 @@ public class RolePK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RolePK rolePK = (RolePK) o;
-        return Objects.equals(user, rolePK.user) && Objects.equals(authority, rolePK.authority);
+        return Objects.equals(user.getUsername(), rolePK.user.getUsername()) && Objects.equals(authority, rolePK.authority);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user, authority);
+        return Objects.hash(user.getUsername(), authority);
     }
 
     @Override
