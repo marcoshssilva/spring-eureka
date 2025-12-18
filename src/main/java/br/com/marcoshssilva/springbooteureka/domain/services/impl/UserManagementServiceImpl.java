@@ -36,6 +36,11 @@ public final class UserManagementServiceImpl implements UserManagementService {
     }
 
     @Override
+    public User getUserByUsername(final String username) throws BusinessException {
+        return userRepository.findByUsername(username).orElseThrow(() -> new BusinessException(MSG_USERNAME_NOT_FOUND));
+    }
+
+    @Override
     public User createUser(final String username, final String password, final Boolean enabled, final String[] roles) throws BusinessException {
         Optional<User> usernameSearch = userRepository.findByUsername(username);
         if (usernameSearch.isPresent()) {

@@ -1,5 +1,7 @@
 package br.com.marcoshssilva.springbooteureka.configs;
 
+import br.com.marcoshssilva.springbooteureka.domain.services.UserManagementService;
+import br.com.marcoshssilva.springbooteureka.domain.services.impl.CustomUserDetailsManagerImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -12,7 +14,6 @@ import org.springframework.security.config.annotation.web.configurers.HeadersCon
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -37,8 +38,8 @@ public class WebSecurityConfiguration {
 
     @Primary
     @Bean
-    public UserDetailsManager defaultUserDetailsManagerBean(DataSource dataSource) {
-        return new JdbcUserDetailsManager(dataSource);
+    public UserDetailsManager defaultUserDetailsManagerBean(DataSource dataSource, UserManagementService userManagementService) {
+        return new CustomUserDetailsManagerImpl(dataSource, userManagementService);
     }
 
     @Primary
