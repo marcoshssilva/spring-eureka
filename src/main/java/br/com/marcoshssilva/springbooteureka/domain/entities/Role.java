@@ -4,6 +4,7 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @lombok.AllArgsConstructor
@@ -11,7 +12,7 @@ import java.util.Objects;
 @lombok.Data
 @Entity
 @Table(name = "authorities")
-public class Role {
+public class Role implements Serializable {
 
     @EmbeddedId
     private RolePK id;
