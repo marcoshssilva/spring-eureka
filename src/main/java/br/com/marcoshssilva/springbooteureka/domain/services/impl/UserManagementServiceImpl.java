@@ -11,9 +11,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,6 +19,7 @@ import java.util.stream.Stream;
 @Service
 @lombok.RequiredArgsConstructor
 public final class UserManagementServiceImpl implements UserManagementService {
+    private static final String ROLE_PREFIX = "ROLE_";
     private static final String MSG_USERNAME_NOT_FOUND = "Username not found in database";
     private static final String MSG_USERNAME_ALREADY_EXISTS = "Username already exists in database.";
     private static final String MSG_PASSWORD_DOESNT_MATCH = "Password doesn't match. Check credentials.";
@@ -43,9 +42,11 @@ public final class UserManagementServiceImpl implements UserManagementService {
             throw new BusinessException(MSG_USERNAME_ALREADY_EXISTS);
         }
 
-        User user = new User(username, passwordEncoder.encode(password), enabled);
+        User user = new User(username, passwordEncoder.encode(password), enabled, null);
+        Set<Role> roleSet = Stream.of(roles).map(role -> new Role(new RolePK(user, formatRole(role)))).collect(Collectors.toSet());
         userRepository.save(user);
-        Stream.of(roles).forEach(role -> roleRepository.save(new Role(new RolePK(user.getUsername(), role))));
+        user.setRoles(roleSet);
+        roleRepository.saveAll(roleSet);
 
         return user;
     }
@@ -53,11 +54,10 @@ public final class UserManagementServiceImpl implements UserManagementService {
     @Override
     public User updateUser(final String username, final String[] roles) throws BusinessException {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new BusinessException(MSG_USERNAME_NOT_FOUND));
-        Set<Role> newRoles = Arrays.stream(roles).map(role -> new Role(new RolePK(username, role))).collect(Collectors.toSet());
-        Set<Role> oldSet = roleRepository.findAllByUsername(username);
-
-        roleRepository.deleteAll(oldSet);
-        roleRepository.saveAll(newRoles);
+        roleRepository.deleteAll(user.getRoles());
+        user.setRoles(new HashSet<>(roleRepository.saveAll(
+                Arrays.stream(roles).map(role -> new Role(new RolePK(user, formatRole(role)))).toList()
+        )));
 
         return userRepository.save(user);
     }
@@ -76,7 +76,7 @@ public final class UserManagementServiceImpl implements UserManagementService {
     @Override
     public void deleteUser(final String username) throws BusinessException {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new BusinessException(MSG_USERNAME_NOT_FOUND));
-        roleRepository.deleteAllById_Username(username);
+        roleRepository.deleteAllById_User_Username(username);
         userRepository.delete(user);
     }
 
@@ -92,5 +92,12 @@ public final class UserManagementServiceImpl implements UserManagementService {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new BusinessException(MSG_USERNAME_NOT_FOUND));
         user.setEnabled(Boolean.FALSE);
         userRepository.save(user);
+    }
+
+    private String formatRole(String role) {
+        if (role.startsWith(ROLE_PREFIX)) {
+            return role;
+        }
+        return ROLE_PREFIX.concat(role);
     }
 }

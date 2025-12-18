@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Set;
 
 public interface RoleRepository extends JpaRepository<Role, RolePK> {
-    @Query("SELECT obj FROM Role obj WHERE obj.id.username = ?1")
+    @Query("SELECT obj FROM Role obj WHERE obj.id.user.username = ?1")
     Set<Role> findAllByUsername(String username);
     @Modifying
-    void deleteAllById_Username(String username);
+    void deleteAllById_User_Username(String username);
 }

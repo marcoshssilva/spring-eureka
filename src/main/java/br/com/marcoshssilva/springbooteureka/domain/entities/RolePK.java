@@ -1,7 +1,6 @@
 package br.com.marcoshssilva.springbooteureka.domain.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -15,8 +14,10 @@ public class RolePK implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "username", nullable = false)
-    private String username;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "username", nullable = false)
+    private User user;
+
     @Column(name = "authority", nullable = false)
     private String authority;
 
@@ -25,11 +26,16 @@ public class RolePK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RolePK rolePK = (RolePK) o;
-        return Objects.equals(username, rolePK.username) && Objects.equals(authority, rolePK.authority);
+        return Objects.equals(user, rolePK.user) && Objects.equals(authority, rolePK.authority);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, authority);
+        return Objects.hash(user, authority);
+    }
+
+    @Override
+    public String toString() {
+        return "RolePK{" + "username=" + user.getUsername() + ", authority='" + authority + '\'' + '}';
     }
 }

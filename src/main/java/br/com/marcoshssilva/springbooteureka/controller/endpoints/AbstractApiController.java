@@ -12,6 +12,7 @@ public abstract class AbstractApiController {
     protected static final String MSG_PASSWORD_CHANGED = "Password has been changed.";
     protected static final String MSG_USER_CREATED = "User created with success.";
     protected static final String MSG_USER_UPDATED = "User updated with success.";
+    protected static final String MSG_USER_DELETED = "User deleted with success.";
 
     protected SimpleStatusResponseBodyDto processRequest(RequestStepsAction action) {
         try {

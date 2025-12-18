@@ -46,10 +46,10 @@ public class AdminController extends AbstractApiController {
 
     @Transactional
     @DeleteMapping("/delete-user/{username}")
-    SimpleStatusResponseBodyDto updateUser(@PathVariable String username) {
+    SimpleStatusResponseBodyDto deleteUser(@PathVariable String username) {
         return processRequest(() -> {
             userManagementService.deleteUser(username);
-            return new SimpleStatusResponseBodyDto(MSG_USER_UPDATED, StatusTypeResponse.SUCCESS);
+            return new SimpleStatusResponseBodyDto(MSG_USER_DELETED, StatusTypeResponse.SUCCESS);
         });
     }
 
