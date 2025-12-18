@@ -4,6 +4,7 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -13,6 +14,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "authorities")
 public class Role implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @EmbeddedId
     private RolePK id;
