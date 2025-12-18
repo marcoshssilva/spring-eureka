@@ -23,7 +23,7 @@ public class User implements UserDetails, Serializable {
     private Boolean enabled;
 
     @OneToMany(mappedBy = "id.user", fetch = FetchType.EAGER)
-    Set<Role> roles;
+    private Set<Role> roles;
 
     @Override
     public boolean equals(Object o) {
