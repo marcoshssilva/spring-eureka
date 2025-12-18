@@ -1,0 +1,19 @@
+volumes:
+  data-db:
+services:
+  app:
+    container_name: 'spring-eureka'
+    restart: unless-stopped
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+    ports:
+      - "8761:8761"
+    volumes:
+      - data-db:/app/data
+    environment:
+      JAVA_VM_OPTIONS: "-Xmx512m -Xms256m -Dmanagement.tracing.enabled=false -Dmanagement.otlp.metrics.export.enabled=false"
+      MANAGEMENT_TRACING_ENABLED: 'false'
+      MANAGEMENT_OTLP_METRICS_EXPORT_ENABLED: 'false'
+      MANAGEMENT_OTLP_TRACING_EXPORT_ENABLED: 'false'
+      MANAGEMENT_OTLP_LOGGING_EXPORT_ENABLED: 'false'

@@ -1,0 +1,28 @@
+volumes:
+  data-db:
+services:
+  app:
+    container_name: 'spring-eureka'
+    restart: unless-stopped
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+    ports:
+      - "8761:8761"
+    volumes:
+      - data-db:/app/data
+    environment:
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4318
+      JAVA_VM_OPTIONS: "-Xmx512m -Xms256m"
+    depends_on:
+      - otel-collector
+  otel-collector:
+    image: otel/opentelemetry-collector
+    restart: unless-stopped
+    container_name: otel-collector
+    command: [ "--config=/etc/otel-collector-config.yaml" ]
+    volumes:
+      - ./etc/opentelemetry/collector-config.yaml:/etc/otel-collector-config.yaml:ro
+    ports:
+      - "4317:4317"   # OTLP GRPC
+      - "4318:4318"   # OTLP HTTP

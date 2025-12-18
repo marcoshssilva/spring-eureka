@@ -1,0 +1,35 @@
+volumes:
+  data-db:
+services:
+  app:
+    container_name: 'spring-eureka'
+    restart: unless-stopped
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+    ports:
+      - "8761:8761"
+    volumes:
+      - data-db:/app/data
+    environment:
+      JAVA_VM_OPTIONS: "-Xmx512m -Xms256m -Dmanagement.tracing.enabled=false -Dmanagement.otlp.metrics.export.enabled=false"
+      MANAGEMENT_TRACING_ENABLED: 'false'
+      MANAGEMENT_OTLP_METRICS_EXPORT_ENABLED: 'false'
+      MANAGEMENT_OTLP_TRACING_EXPORT_ENABLED: 'false'
+      MANAGEMENT_OTLP_LOGGING_EXPORT_ENABLED: 'false'
+      HIBERNATE_DIALECT: 'org.hibernate.dialect.PostgreSQLDialect'
+      SPRING_DATASOURCE_DRIVERCLASSNAME: 'org.postgresql.Driver'
+      SPRING_DATASOURCE_URL: 'jdbc:postgresql://postgres-db:5432/postgres'
+      SPRING_DATASOURCE_USERNAME: 'postgres'
+      SPRING_DATASOURCE_PASSWORD: 'Password123'
+    depends_on:
+      - postgres-db
+  postgres-db:
+    image: postgres:14.5-alpine
+    restart: on-failure
+    environment:
+      POSTGRES_PASSWORD: "Password123"
+    ports:
+      - "5432:5432"
+    volumes:
+      - data-db:/var/lib/postgresql/data
