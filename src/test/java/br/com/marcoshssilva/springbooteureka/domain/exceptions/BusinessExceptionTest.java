@@ -1,6 +1,5 @@
-package br.com.marcoshssilva.springbooteureka.internal.exceptions;
+package br.com.marcoshssilva.springbooteureka.domain.exceptions;
 
-import br.com.marcoshssilva.springbooteureka.domain.exceptions.BusinessException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

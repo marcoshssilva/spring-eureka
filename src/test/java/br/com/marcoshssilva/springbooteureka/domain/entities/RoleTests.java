@@ -1,4 +1,4 @@
-package br.com.marcoshssilva.springbooteureka.internal.domain;
+package br.com.marcoshssilva.springbooteureka.domain.entities;
 
 import br.com.marcoshssilva.springbooteureka.domain.entities.Role;
 import br.com.marcoshssilva.springbooteureka.domain.entities.RolePK;
