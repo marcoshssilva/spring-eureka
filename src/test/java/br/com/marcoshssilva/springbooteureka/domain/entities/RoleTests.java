@@ -1,8 +1,5 @@
 package br.com.marcoshssilva.springbooteureka.domain.entities;
 
-import br.com.marcoshssilva.springbooteureka.domain.entities.Role;
-import br.com.marcoshssilva.springbooteureka.domain.entities.RolePK;
-import br.com.marcoshssilva.springbooteureka.domain.entities.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
