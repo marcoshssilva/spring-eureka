@@ -1,0 +1,91 @@
+spring:
+  application:
+    name: ${APP_NAME:spring-cloud-eureka}
+  profiles:
+    active: test
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=10000,expireAfterWrite=30s
+  batch:
+    jdbc:
+      initialize-schema: embedded
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./data/EUREKADB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      dialect: org.hibernate.dialect.H2Dialect
+server:
+  port: 8761
+  servlet:
+    context-path: /
+eureka:
+  datacenter: 'local'
+  environment: 'test'
+  server:
+    peer-node-read-timeout-ms: 3000
+  instance:
+    leaseRenewalIntervalInSeconds: 30
+    health-check-url-path: /actuator/health
+    preferIpAddress: true
+    metadata-map:
+      username: metrics
+      password: changeit
+  client:
+    registryFetchIntervalSeconds: 30
+    register-with-eureka: false
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://admin:admin@localhost:${server.port}/eureka/
+management:
+  server:
+    port: 8761
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+      cors:
+        allowed-origins: '*'
+        allowed-methods: '*'
+        max-age: 3600
+    jmx:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: when_authorized
+      show-components: when_authorized
+    configprops:
+      show-values: when_authorized
+    env:
+      show-values: when_authorized
+  tracing:
+    enabled: false
+    sampling:
+      probability: 1.0
+  otlp:
+    metrics:
+      export:
+        enabled: false
+        url: http://localhost:4318/v1/metrics
+        batchSize: 10000
+        aggregationTemporality: cumulative
+        step: 1m
+    tracing:
+      endpoint: http://localhost:4318/v1/traces
+      export:
+        enabled: false
+    logging:
+      endpoint: http://localhost:4318/v1/logs
+      export:
+        enabled: false
+logging:
+  level:
+    com.netflix.eureka: OFF
+    com.netflix.discovery: OFF
