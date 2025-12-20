@@ -30,7 +30,7 @@ public class WebSecurityConfiguration {
     static final String ROLE_READER  = "READER";
     static final String ROLE_CLIENT  = "CLIENT";
 
-    static final String[] ALLOW_BY_ROLE_METRICS = { "/actuator/**" };
+    static final String[] ALLOW_BY_ROLE_METRICS = { "/actuator/**", "/actuator" };
     static final String[] ALLOW_BY_ROLE_CLIENT = { "/eureka/v2/apps", "/eureka/v2/apps/**" };
     static final String[] ALLOW_BY_ROLE_READER = { "/", "/lastn" };
     static final String[] ALLOW_BY_ROLE_ADMIN  = { "/api/admin/**", "/h2-console/**" };
