@@ -16,10 +16,10 @@ import java.util.concurrent.CompletableFuture;
 public class InitMetricsUserIfNotExistsTask {
     private static final String DEFAULT_ROLE = UserRoles.METRICS.getAuthority();
 
-    @Value("${eureka.instance.metadata-map.username}")
+    @Value("${eureka.instance.metadata-map.user.name}")
     String metricsUsername = "metrics";
 
-    @Value("${eureka.instance.metadata-map.password}")
+    @Value("${eureka.instance.metadata-map.user.password}")
     String metricsPassword = "changeit";
 
     private final UserDetailsManager userDetailsManager;
