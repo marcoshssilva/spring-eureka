@@ -35,8 +35,8 @@ eureka:
     health-check-url-path: /actuator/health
     preferIpAddress: true
     metadata-map:
-      username: metrics
-      password: changeit
+      user.name: metrics
+      user.password: changeit
   client:
     registryFetchIntervalSeconds: 30
     register-with-eureka: false
