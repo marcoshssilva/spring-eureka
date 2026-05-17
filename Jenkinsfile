@@ -1,8 +1,10 @@
-@Library('java@main') _
-pipelineUsingJava17AndMavenWithPublicDockerImage('marcoshssilva/spring-eureka',
+@Library('java') _
+pipelineSimpleMavenJavaProject(
+    'marcoshssilva/spring-eureka',
+    'jdk-17',
     [
         'APP_NAME': 'spring-eureka',
         'DEPLOY': 'DOKKU',
-        'DOKKU_SELECTED_BUILDPACK': 'pack'
-    ],
-)
+        'ENABLE_SONARQUBE_CHECK': 'true',
+        'AGENT_EXTRA_LABELS': 'node-builder'
+    ])
