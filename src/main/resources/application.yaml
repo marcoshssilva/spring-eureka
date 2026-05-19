@@ -83,7 +83,7 @@ management:
       endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/logs
       export:
         enabled: ${MANAGEMENT_OTLP_LOGGING_EXPORT_ENABLED:true}
-logging:
-  level:
+#logging:
+#  level:
 #    com.netflix.eureka: OFF
 #    com.netflix.discovery: OFF
