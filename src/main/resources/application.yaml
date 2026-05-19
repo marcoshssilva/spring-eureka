@@ -66,14 +66,14 @@ management:
   tracing:
     enabled: ${MANAGEMENT_TRACING_ENABLED:true}
     sampling:
-      probability: 1.0
+      probability: ${MANAGEMENT_TRACING_SAMPLING_PROBABILITY:1.0}
   otlp:
     metrics:
       export:
         enabled: ${MANAGEMENT_OTLP_METRICS_EXPORT_ENABLED:true}
         url: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/metrics
-        batchSize: 10000
-        aggregationTemporality: cumulative
+        batchSize: ${OTEL_EXPORTER_OTLP_BATCH_SIZE:100}
+        aggregationTemporality: ${OTEL_EXPORTER_OTLP_AGGREGATION_TEMPORALITY:cumulative}
         step: 1m
     tracing:
       endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/traces
@@ -85,5 +85,5 @@ management:
         enabled: ${MANAGEMENT_OTLP_LOGGING_EXPORT_ENABLED:true}
 logging:
   level:
-    com.netflix.eureka: OFF
-    com.netflix.discovery: OFF
+#    com.netflix.eureka: OFF
+#    com.netflix.discovery: OFF
