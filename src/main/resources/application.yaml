@@ -74,7 +74,7 @@ management:
         url: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/metrics
         batchSize: ${OTEL_EXPORTER_OTLP_BATCH_SIZE:100}
         aggregationTemporality: ${OTEL_EXPORTER_OTLP_AGGREGATION_TEMPORALITY:cumulative}
-        step: 1m
+        step: ${OTEL_EXPORTER_OTLP_AGGREGATION_STEP:1m}
     tracing:
       endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/traces
       export:
