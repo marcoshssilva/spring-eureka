@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ${APP_NAME:spring-cloud-eureka}
+    name: ${APP_NAME:spring-eureka}
   cache:
     type: caffeine
     caffeine:
@@ -44,7 +44,15 @@ eureka:
 management:
   server:
     port: ${MANAGEMENT_PORT:8761}
+  info:
+    env.enabled: true
+    java.enabled: true
+    os.enabled: true
+    process.enabled: true
+    git.enabled: true
+    git.mode: full
   endpoints:
+    jmx.exposure.include: "*"
     web:
       exposure:
         include: '*'
@@ -52,17 +60,14 @@ management:
         allowed-origins: ${MANAGEMENT_CORS_ALLOWED_ORIGINS:'*'}
         allowed-methods: ${MANAGEMENT_CORS_ALLOWED_METHODS:'*'}
         max-age: ${MANAGEMENT_CORS_ALLOWED_MAXAGE:3600}
-    jmx:
-      exposure:
-        include: '*'
   endpoint:
     health:
-      show-details: when_authorized
-      show-components: when_authorized
-    configprops:
-      show-values: when_authorized
+      show-details: always
+      show-components: always
     env:
-      show-values: when_authorized
+      show-values: always
+    configprops:
+      show-values: always
   tracing:
     enabled: ${MANAGEMENT_TRACING_ENABLED:true}
     sampling:
