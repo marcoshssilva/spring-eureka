@@ -4,6 +4,17 @@ Eureka service discovery to Spring Boot Apps and supported as NodeJS, Quarkus, M
 
 [![Quality gate](https://app-qsonar.marcosilva.dev/api/project_badges/quality_gate?project=marcoshssilva-spring-eureka)](https://qsonar.starlord443.dev/dashboard?id=marcoshssilva-spring-eureka)
 
+[![Coverage](https://app-qsonar.marcosilva.dev/api/project_badges/measure?project=marcoshssilva-spring-eureka&metric=coverage&token=sqb_dae11bee585c372b0999183ea16d9fbc8040ac2a)](https://app-qsonar.marcosilva.dev/dashboard?id=marcoshssilva-spring-eureka)
+[![Duplicated Lines (%)](https://app-qsonar.marcosilva.dev/api/project_badges/measure?project=marcoshssilva-spring-eureka&metric=duplicated_lines_density&token=sqb_dae11bee585c372b0999183ea16d9fbc8040ac2a)](https://app-qsonar.marcosilva.dev/dashboard?id=marcoshssilva-spring-eureka)
+[![Security Hotspots](https://app-qsonar.marcosilva.dev/api/project_badges/measure?project=marcoshssilva-spring-eureka&metric=security_hotspots&token=sqb_dae11bee585c372b0999183ea16d9fbc8040ac2a)](https://app-qsonar.marcosilva.dev/dashboard?id=marcoshssilva-spring-eureka)
+[![Reliability Issues](https://app-qsonar.marcosilva.dev/api/project_badges/measure?project=marcoshssilva-spring-eureka&metric=software_quality_reliability_issues&token=sqb_dae11bee585c372b0999183ea16d9fbc8040ac2a)](https://app-qsonar.marcosilva.dev/dashboard?id=marcoshssilva-spring-eureka)
+[![Maintainability Issues](https://app-qsonar.marcosilva.dev/api/project_badges/measure?project=marcoshssilva-spring-eureka&metric=software_quality_maintainability_issues&token=sqb_dae11bee585c372b0999183ea16d9fbc8040ac2a)](https://app-qsonar.marcosilva.dev/dashboard?id=marcoshssilva-spring-eureka)
+[![Security Issues](https://app-qsonar.marcosilva.dev/api/project_badges/measure?project=marcoshssilva-spring-eureka&metric=software_quality_security_issues&token=sqb_dae11bee585c372b0999183ea16d9fbc8040ac2a)](https://app-qsonar.marcosilva.dev/dashboard?id=marcoshssilva-spring-eureka)
+[![Maintainability Rating](https://app-qsonar.marcosilva.dev/api/project_badges/measure?project=marcoshssilva-spring-eureka&metric=software_quality_maintainability_rating&token=sqb_dae11bee585c372b0999183ea16d9fbc8040ac2a)](https://app-qsonar.marcosilva.dev/dashboard?id=marcoshssilva-spring-eureka)
+[![Reliability Rating](https://app-qsonar.marcosilva.dev/api/project_badges/measure?project=marcoshssilva-spring-eureka&metric=software_quality_reliability_rating&token=sqb_dae11bee585c372b0999183ea16d9fbc8040ac2a)](https://app-qsonar.marcosilva.dev/dashboard?id=marcoshssilva-spring-eureka)
+[![Security Rating](https://app-qsonar.marcosilva.dev/api/project_badges/measure?project=marcoshssilva-spring-eureka&metric=software_quality_security_rating&token=sqb_dae11bee585c372b0999183ea16d9fbc8040ac2a)](https://app-qsonar.marcosilva.dev/dashboard?id=marcoshssilva-spring-eureka)
+[![Technical Debt](https://app-qsonar.marcosilva.dev/api/project_badges/measure?project=marcoshssilva-spring-eureka&metric=software_quality_maintainability_remediation_effort&token=sqb_dae11bee585c372b0999183ea16d9fbc8040ac2a)](https://app-qsonar.marcosilva.dev/dashboard?id=marcoshssilva-spring-eureka)
+
 Link to SonarQube project [spring-eureka](https://app-qsonar.marcosilva.dev/dashboard?id=marcoshssilva-spring-eureka)
 
 ## Roles
