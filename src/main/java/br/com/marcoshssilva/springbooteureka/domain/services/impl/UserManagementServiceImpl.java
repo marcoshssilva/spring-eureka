@@ -59,7 +59,9 @@ public final class UserManagementServiceImpl implements UserManagementService {
     @Override
     public User updateUser(final String username, final String[] roles) throws BusinessException {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new BusinessException(MSG_USERNAME_NOT_FOUND));
-        roleRepository.deleteAll(user.getRoles());
+        if (user.getRoles() != null && !user.getRoles().isEmpty()) {
+            roleRepository.deleteAll(user.getRoles());
+        }
         user.setRoles(new HashSet<>(roleRepository.saveAll(
                 Arrays.stream(roles).map(role -> new Role(new RolePK(user, formatRole(role)))).toList()
         )));
