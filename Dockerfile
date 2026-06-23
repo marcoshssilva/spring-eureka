@@ -20,7 +20,7 @@ ENV OTEL_LOGS_EXPORTER="otlp"
 ENV OTEL_TRACES_EXPORTER="otlp"
 ENV OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4318"
 ENV OTEL_SERVICE_NAME="spring-cloud-eureka"
-ENV PORT="8761"
+ENV PORT="5000"
 ENV MANAGEMENT_PORT="8761"
 
 
@@ -29,4 +29,4 @@ CMD ["exec java $JAVA_VM_OPTIONS -jar /app/app.jar"]
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 CMD sh -c "wget --no-verbose --tries=1 --spider http://localhost:$MANAGEMENT_PORT/actuator/health || exit 1"
 
-EXPOSE 8761
+EXPOSE 5000 8761

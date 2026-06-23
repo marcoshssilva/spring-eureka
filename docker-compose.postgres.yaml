@@ -8,6 +8,7 @@ services:
       dockerfile: ./Dockerfile
       context: ./
     ports:
+      - "5000:5000"
       - "8761:8761"
     volumes:
       - data-db:/app/data
