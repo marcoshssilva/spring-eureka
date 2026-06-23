@@ -27,7 +27,7 @@ spring:
     properties:
       dialect: org.hibernate.dialect.H2Dialect
 server:
-  port: 8761
+  port: 5000
   servlet:
     context-path: /
 eureka:
