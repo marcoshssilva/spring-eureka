@@ -10,6 +10,11 @@ spring:
   batch:
     jdbc:
       initialize-schema: embedded
+  session:
+    store-type: jdbc
+    jdbc:
+      # Tables are created by Hibernate (ddl-auto), so Spring Session must not run its own schema scripts.
+      initialize-schema: never
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:EUREKADB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
