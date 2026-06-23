@@ -23,7 +23,7 @@ You can log using initial user **admin** with credentials **admin**
 
 Endpoint: `/api/user/change-password`
 ```
- curl -X 'POST' http://localhost:8761/api/user/change-password \
+ curl -X 'POST' http://localhost:5000/api/user/change-password \
    -H 'Content-type: application/json' \
    -H 'Authorization: Basic YWRtaW46YWRtaW4=' \
    -d '{ "oldPassword": "YOUR_PASSWORD", "newPassword": "YOUR_NEW_PASSWORD" }' \
@@ -35,7 +35,7 @@ Endpoint: `/api/user/change-password`
 
 Endpoint: `/api/admin/reset-password`
 ```
- curl -X 'POST' http://localhost:8761/api/admin/reset-password \
+ curl -X 'POST' http://localhost:5000/api/admin/reset-password \
    -H 'Content-type: application/json' \
    -H 'Authorization: Basic YWRtaW46YWRtaW4=' \
    -d '{ "username": "admin", "newPassword": "PUT_YOUR_NEW_PASSWORD_HERE" }' \
@@ -46,7 +46,7 @@ Endpoint: `/api/admin/reset-password`
 
 Endpoint: `/api/admin/create-user`
 ```
-curl -X 'POST' http://localhost:8761/api/admin/create-user \
+curl -X 'POST' http://localhost:5000/api/admin/create-user \
    -H 'Content-type: application/json' \
    -H 'Authorization: Basic YWRtaW46YWRtaW4=' \
    -d '{ "username": "YOUR_USERNAME", "password": "YOUR_PASSWORD", "enabled": "true", "roles": ["ADMIN", "READER"] }' \
@@ -57,7 +57,7 @@ curl -X 'POST' http://localhost:8761/api/admin/create-user \
 
 Endpoint: `/api/admin/update-user`
 ```
-curl -X 'POST' http://localhost:8761/api/admin/update-user \
+curl -X 'POST' http://localhost:5000/api/admin/update-user \
    -H 'Content-type: application/json' \
    -H 'Authorization: Basic YWRtaW46YWRtaW4=' \
    -d '{ "username": "YOUR_USERNAME", "roles": ["ROLE1", "ROLE2"] }' \
@@ -69,7 +69,7 @@ curl -X 'POST' http://localhost:8761/api/admin/update-user \
 Endpoint: `/api/admin/delete-user/{username}`
 
 ```
-curl -X 'DELETE' http://localhost:8761/api/admin/delete-user/{username} \
+curl -X 'DELETE' http://localhost:5000/api/admin/delete-user/{username} \
    -H 'Content-type: application/json' \
    -H 'Authorization: Basic YWRtaW46YWRtaW4=' \
    -v
@@ -78,7 +78,7 @@ curl -X 'DELETE' http://localhost:8761/api/admin/delete-user/{username} \
 
 Endpoint: `/api/admin/enable-user/{username}`
 ```
-curl -X 'PUT' http://localhost:8761/api/admin/enable-user/{username} \
+curl -X 'PUT' http://localhost:5000/api/admin/enable-user/{username} \
    -H 'Content-type: application/json' \
    -H 'Authorization: Basic YWRtaW46YWRtaW4=' \
    -v
@@ -88,7 +88,7 @@ curl -X 'PUT' http://localhost:8761/api/admin/enable-user/{username} \
 
 Endpoint: `/api/admin/disable-user/{username}`
 ```
-curl -X 'PUT' http://localhost:8761/api/admin/disable-user/{username} \
+curl -X 'PUT' http://localhost:5000/api/admin/disable-user/{username} \
    -H 'Content-type: application/json' \
    -H 'Authorization: Basic YWRtaW46YWRtaW4=' \
    -v
