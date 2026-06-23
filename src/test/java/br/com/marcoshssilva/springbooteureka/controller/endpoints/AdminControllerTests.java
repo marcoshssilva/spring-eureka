@@ -1,5 +1,6 @@
 package br.com.marcoshssilva.springbooteureka.controller.endpoints;
 
+import br.com.marcoshssilva.springbooteureka.configs.WebSecurityConfiguration;
 import br.com.marcoshssilva.springbooteureka.controller.data.etc.UserRoles;
 import br.com.marcoshssilva.springbooteureka.controller.data.requests.AdminCreateUserRequestBodyDto;
 import br.com.marcoshssilva.springbooteureka.controller.data.requests.AdminResetPasswordRequestBodyDto;
@@ -12,17 +13,21 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.sql.DataSource;
 import java.util.Arrays;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(AdminController.class)
+@Import(WebSecurityConfiguration.class)
 @WithMockUser(roles = "ADMIN")
 class AdminControllerTests {
 
@@ -31,6 +36,9 @@ class AdminControllerTests {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @MockBean
+    private DataSource dataSource;
 
     @MockBean
     private UserManagementService userManagementService;
@@ -46,6 +54,7 @@ class AdminControllerTests {
         AdminResetPasswordRequestBodyDto body = new AdminResetPasswordRequestBodyDto("tester", "newPass");
 
         mockMvc.perform(post("/api/admin/reset-password")
+                .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(body)))
                 .andExpect(status().isOk())
@@ -57,6 +66,7 @@ class AdminControllerTests {
         AdminCreateUserRequestBodyDto body = new AdminCreateUserRequestBodyDto("tester", "password", true, new UserRoles[]{UserRoles.CLIENT});
 
         mockMvc.perform(post("/api/admin/create-user")
+                .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(body)))
                 .andExpect(status().isOk())
@@ -68,6 +78,7 @@ class AdminControllerTests {
         AdminUpdateUserRequestBodyDto body = new AdminUpdateUserRequestBodyDto("tester", new UserRoles[]{UserRoles.CLIENT});
 
         mockMvc.perform(post("/api/admin/update-user")
+                .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(body)))
                 .andExpect(status().isOk())
@@ -76,21 +87,24 @@ class AdminControllerTests {
 
     @Test
     void testDeleteUser() throws Exception {
-        mockMvc.perform(delete("/api/admin/delete-user/tester"))
+        mockMvc.perform(delete("/api/admin/delete-user/tester")
+                .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("SUCCESS"));
     }
 
     @Test
     void testEnableUser() throws Exception {
-        mockMvc.perform(put("/api/admin/enable-user/tester"))
+        mockMvc.perform(put("/api/admin/enable-user/tester")
+                .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("SUCCESS"));
     }
 
     @Test
     void testDisableUser() throws Exception {
-        mockMvc.perform(put("/api/admin/disable-user/tester"))
+        mockMvc.perform(put("/api/admin/disable-user/tester")
+                .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("SUCCESS"));
     }

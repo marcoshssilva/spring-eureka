@@ -42,8 +42,8 @@ class UserManagementServiceImplTests {
 
     @BeforeEach
     void setup() {
-        userRepository.deleteAll();
         roleRepository.deleteAll();
+        userRepository.deleteAll();
     }
 
     @DisplayName("Must call createUser() and if not exists create with sucess")
