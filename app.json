@@ -1,5 +1,24 @@
 {
     "name": "spring-eureka",
     "description": "Simple service discovery for Spring Apps",
-    "addons": []
+    "addons": [],
+    "env": {
+        "PORT": {
+            "description": "Application default port",
+            "value": "5000"
+        },
+        "MANAGEMENT_PORT": {
+            "description": "Actuator default port",
+            "value": "8761"
+        }
+    },
+    "healthchecks": {
+        "web": [
+            {
+                "type": "http",
+                "path": "/actuator/health",
+                "port": 8761
+            }
+        ]
+    }
 }
