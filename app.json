@@ -15,7 +15,7 @@
     "healthchecks": {
         "web": [
             {
-                "type": "http",
+                "type": "startup",
                 "path": "/actuator/health",
                 "port": 8761
             }
