@@ -9,7 +9,6 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,15 +16,12 @@ import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import javax.sql.DataSource;
 
 @Configuration
 @EnableMethodSecurity()
 @EnableWebSecurity
 public class WebSecurityConfiguration {
-    private static final Logger log = LoggerFactory.getLogger(WebSecurityConfiguration.class);
     static final String ROLE_METRICS = "METRICS";
     static final String ROLE_ADMIN   = "ADMIN";
     static final String ROLE_READER  = "READER";
@@ -35,7 +31,7 @@ public class WebSecurityConfiguration {
     static final String[] ALLOW_BY_ROLE_CLIENT = { "/eureka/v2/apps", "/eureka/v2/apps/**" };
     static final String[] ALLOW_BY_ROLE_READER = { "/", "/lastn" };
     static final String[] ALLOW_BY_ROLE_ADMIN  = { "/api/admin/**", "/h2-console/**" };
-    static final String[] PUBLIC_ROUTES = { "/favicon.ico", "/eureka/css/**", "/eureka/js/**", "/eureka/fonts/**", "/eureka/images/**" };
+    static final String[] PUBLIC_ROUTES = { "/favicon.ico", "/eureka/css/**", "/eureka/js/**", "/eureka/fonts/**", "/eureka/images/**", "/actuator/health" };
 
     @Primary
     @Bean
@@ -50,7 +46,7 @@ public class WebSecurityConfiguration {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChainConfigure(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChainConfigure(HttpSecurity http) {
         http.httpBasic(Customizer.withDefaults());
         http.sessionManagement(sessionConfigurer -> sessionConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
