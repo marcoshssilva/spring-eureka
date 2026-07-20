@@ -7,12 +7,10 @@ class RolePKTests {
     @Test
     void testGettersAndSetters() {
         User user = new User("john", "123", true, null);
-        RolePK pk = new RolePK();
-        pk.setUser(user);
-        pk.setAuthority("ROLE_ADMIN");
+        RolePK pk = new RolePK(user, "ROLE_ADMIN");
 
-        assertEquals(user, pk.getUser());
-        assertEquals("ROLE_ADMIN", pk.getAuthority());
+        assertEquals(user, pk.user());
+        assertEquals("ROLE_ADMIN", pk.authority());
     }
 
     @Test

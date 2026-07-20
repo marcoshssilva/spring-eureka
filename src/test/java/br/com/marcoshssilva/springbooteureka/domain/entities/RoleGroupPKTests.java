@@ -6,12 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class RoleGroupPKTests {
     @Test
     void testGettersAndSetters() {
-        RoleGroupPK pk = new RoleGroupPK();
-        pk.setGroupId(1L);
-        pk.setRole("ROLE_ADMIN");
+        RoleGroupPK pk = new RoleGroupPK(1L, "ROLE_ADMIN");
 
-        assertEquals(1L, pk.getGroupId());
-        assertEquals("ROLE_ADMIN", pk.getRole());
+        assertEquals(1L, pk.groupId());
+        assertEquals("ROLE_ADMIN", pk.role());
     }
 
     @Test

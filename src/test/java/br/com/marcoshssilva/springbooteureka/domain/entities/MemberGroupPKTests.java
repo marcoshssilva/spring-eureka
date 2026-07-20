@@ -6,12 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class MemberGroupPKTests {
     @Test
     void testGettersAndSetters() {
-        MemberGroupPK pk = new MemberGroupPK();
-        pk.setGroupId(1L);
-        pk.setUsername("user");
+        MemberGroupPK pk = new MemberGroupPK(1L, "user");
 
-        assertEquals(1L, pk.getGroupId());
-        assertEquals("user", pk.getUsername());
+        assertEquals(1L, pk.groupId());
+        assertEquals("user", pk.username());
     }
 
     @Test

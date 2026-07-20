@@ -6,12 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class SpringSessionAttributesPKTests {
     @Test
     void testGettersAndSetters() {
-        SpringSessionAttributesPK pk = new SpringSessionAttributesPK();
-        pk.setSessionPrimaryId("p1");
-        pk.setAttributeName("attr");
+        SpringSessionAttributesPK pk = new SpringSessionAttributesPK("p1", "attr");
 
-        assertEquals("p1", pk.getSessionPrimaryId());
-        assertEquals("attr", pk.getAttributeName());
+        assertEquals("p1", pk.sessionPrimaryId());
+        assertEquals("attr", pk.attributeName());
     }
 
     @Test
