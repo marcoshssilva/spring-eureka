@@ -1,7 +1,6 @@
 package br.com.marcoshssilva.springbooteureka.domain.tasks;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.security.provisioning.UserDetailsManager;
 
 import java.util.concurrent.CompletableFuture;
@@ -13,7 +12,7 @@ class InitSuperUserIfNotExistsTaskTests {
 
     @Test
     void testExecuteTaskUserExists() {
-        UserDetailsManager userDetailsManager = Mockito.mock(UserDetailsManager.class);
+        UserDetailsManager userDetailsManager = mock(UserDetailsManager.class);
         InitSuperUserIfNotExistsTask task = new InitSuperUserIfNotExistsTask(userDetailsManager);
 
         when(userDetailsManager.userExists(any())).thenReturn(true);
@@ -26,7 +25,7 @@ class InitSuperUserIfNotExistsTaskTests {
 
     @Test
     void testExecuteTaskUserNotExists() {
-        UserDetailsManager userDetailsManager = Mockito.mock(UserDetailsManager.class);
+        UserDetailsManager userDetailsManager = mock(UserDetailsManager.class);
         InitSuperUserIfNotExistsTask task = new InitSuperUserIfNotExistsTask(userDetailsManager);
 
         when(userDetailsManager.userExists(any())).thenReturn(false);

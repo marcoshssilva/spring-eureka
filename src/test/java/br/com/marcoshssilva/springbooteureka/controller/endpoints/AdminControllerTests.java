@@ -64,7 +64,7 @@ class AdminControllerTests {
         try {
             userManagementService.deleteUser("tester");
         } catch (Exception _) {
-            // do nothing
+            // Ignored: user might not exist
         }
     }
 

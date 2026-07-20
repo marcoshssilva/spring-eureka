@@ -46,7 +46,7 @@ public class WebSecurityConfiguration {
     @Primary
     @Bean
     public PasswordEncoder defaultPasswordEncoder() {
-        return SCryptPasswordEncoder.defaultsForSpringSecurity_v5_8();
+        return new SCryptPasswordEncoder(16384, 8, 1, 32, 16);
     }
 
     @Bean
@@ -54,7 +54,7 @@ public class WebSecurityConfiguration {
         http.httpBasic(Customizer.withDefaults());
         http.sessionManagement(sessionConfigurer -> sessionConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
-        http.csrf(CsrfConfigurer::disable);
+        http.csrf(csrf -> csrf.disable());
         http.authorizeHttpRequests(
                 httpRequestsConfigurer -> httpRequestsConfigurer
                         .requestMatchers(PUBLIC_ROUTES).permitAll()

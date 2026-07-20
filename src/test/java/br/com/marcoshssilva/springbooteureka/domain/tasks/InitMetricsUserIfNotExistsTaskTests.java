@@ -1,7 +1,6 @@
 package br.com.marcoshssilva.springbooteureka.domain.tasks;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 
@@ -14,8 +13,8 @@ class InitMetricsUserIfNotExistsTaskTests {
 
     @Test
     void testExecuteTaskUserExists() {
-        UserDetailsManager userDetailsManager = Mockito.mock(UserDetailsManager.class);
-        PasswordEncoder passwordEncoder = Mockito.mock(PasswordEncoder.class);
+        UserDetailsManager userDetailsManager = mock(UserDetailsManager.class);
+        PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
         InitMetricsUserIfNotExistsTask task = new InitMetricsUserIfNotExistsTask(userDetailsManager, passwordEncoder);
 
         when(userDetailsManager.userExists(any())).thenReturn(true);
@@ -28,8 +27,8 @@ class InitMetricsUserIfNotExistsTaskTests {
 
     @Test
     void testExecuteTaskUserNotExists() {
-        UserDetailsManager userDetailsManager = Mockito.mock(UserDetailsManager.class);
-        PasswordEncoder passwordEncoder = Mockito.mock(PasswordEncoder.class);
+        UserDetailsManager userDetailsManager = mock(UserDetailsManager.class);
+        PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
         InitMetricsUserIfNotExistsTask task = new InitMetricsUserIfNotExistsTask(userDetailsManager, passwordEncoder);
 
         when(userDetailsManager.userExists(any())).thenReturn(false);
