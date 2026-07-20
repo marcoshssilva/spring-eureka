@@ -8,46 +8,15 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class SpringSessionAttributesPK implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
-
+public record SpringSessionAttributesPK(
     @Column(name = "SESSION_PRIMARY_ID", length = 36, nullable = false)
-    private String sessionPrimaryId;
+    String sessionPrimaryId,
 
     @Column(name = "ATTRIBUTE_NAME", length = 200, nullable = false)
-    private String attributeName;
-
-    public SpringSessionAttributesPK() {}
-
-    public SpringSessionAttributesPK(String sessionPrimaryId, String attributeName) {
-        this.sessionPrimaryId = sessionPrimaryId;
-        this.attributeName = attributeName;
-    }
-
-    public String getSessionPrimaryId() {
-        return sessionPrimaryId;
-    }
-
-    public void setSessionPrimaryId(String sessionPrimaryId) {
-        this.sessionPrimaryId = sessionPrimaryId;
-    }
-
-    public String getAttributeName() {
-        return attributeName;
-    }
-
-    public void setAttributeName(String attributeName) {
-        this.attributeName = attributeName;
-    }
-
-    @Override
-    public String toString() {
-        return "SpringSessionAttributesPK{" +
-                "sessionPrimaryId='" + sessionPrimaryId + '\'' +
-                ", attributeName='" + attributeName + '\'' +
-                '}';
-    }
+    String attributeName
+) implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Override
     public boolean equals(Object o) {
@@ -60,5 +29,13 @@ public class SpringSessionAttributesPK implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(sessionPrimaryId, attributeName);
+    }
+
+    @Override
+    public String toString() {
+        return "SpringSessionAttributesPK{" +
+                "sessionPrimaryId='" + sessionPrimaryId + '\'' +
+                ", attributeName='" + attributeName + '\'' +
+                '}';
     }
 }

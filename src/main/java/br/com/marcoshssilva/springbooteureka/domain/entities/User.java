@@ -87,7 +87,7 @@ public class User implements UserDetails, Serializable {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (this.roles == null) return java.util.Collections.emptySet();
-        return this.roles.stream().map(role -> new SimpleGrantedAuthority(role.getId().getAuthority())).collect(Collectors.toSet());
+        return this.roles.stream().map(role -> new SimpleGrantedAuthority(role.getId().authority())).collect(Collectors.toSet());
     }
 
     @Override

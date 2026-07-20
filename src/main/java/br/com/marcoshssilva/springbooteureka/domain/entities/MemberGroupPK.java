@@ -8,44 +8,13 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class MemberGroupPK implements Serializable {
-    @Serial private static final long serialVersionUID = 1L;
-
+public record MemberGroupPK(
     @Column(name = "group_id")
-    private Long groupId;
+    Long groupId,
     @Column(name = "username")
-    private String username;
-
-    public MemberGroupPK() {}
-
-    public MemberGroupPK(Long groupId, String username) {
-        this.groupId = groupId;
-        this.username = username;
-    }
-
-    public Long getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(Long groupId) {
-        this.groupId = groupId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    @Override
-    public String toString() {
-        return "MemberGroupPK{" +
-                "groupId=" + groupId +
-                ", username='" + username + '\'' +
-                '}';
-    }
+    String username
+) implements Serializable {
+    @Serial private static final long serialVersionUID = 1L;
 
     @Override
     public boolean equals(Object o) {
@@ -58,5 +27,13 @@ public class MemberGroupPK implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(groupId, username);
+    }
+
+    @Override
+    public String toString() {
+        return "MemberGroupPK{" +
+                "groupId=" + groupId +
+                ", username='" + username + '\'' +
+                '}';
     }
 }

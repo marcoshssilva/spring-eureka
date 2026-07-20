@@ -6,44 +6,13 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class RoleGroupPK implements Serializable {
-    @Serial private static final long serialVersionUID = 1L;
-
+public record RoleGroupPK(
     @Column(name = "group_id")
-    private Long groupId;
+    Long groupId,
     @Column(name = "authority")
-    private String role;
-
-    public RoleGroupPK() {}
-
-    public RoleGroupPK(Long groupId, String role) {
-        this.groupId = groupId;
-        this.role = role;
-    }
-
-    public Long getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(Long groupId) {
-        this.groupId = groupId;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    @Override
-    public String toString() {
-        return "RoleGroupPK{" +
-                "groupId=" + groupId +
-                ", role='" + role + '\'' +
-                '}';
-    }
+    String role
+) implements Serializable {
+    @Serial private static final long serialVersionUID = 1L;
 
     @Override
     public boolean equals(Object o) {
@@ -56,5 +25,13 @@ public class RoleGroupPK implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(groupId, role);
+    }
+
+    @Override
+    public String toString() {
+        return "RoleGroupPK{" +
+                "groupId=" + groupId +
+                ", role='" + role + '\'' +
+                '}';
     }
 }
