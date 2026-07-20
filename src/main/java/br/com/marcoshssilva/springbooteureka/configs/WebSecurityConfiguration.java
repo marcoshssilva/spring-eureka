@@ -31,7 +31,7 @@ public class WebSecurityConfiguration {
     static final String[] ALLOW_BY_ROLE_CLIENT = { "/eureka/v2/apps", "/eureka/v2/apps/**" };
     static final String[] ALLOW_BY_ROLE_READER = { "/", "/lastn" };
     static final String[] ALLOW_BY_ROLE_ADMIN  = { "/api/admin/**", "/h2-console/**" };
-    static final String[] PUBLIC_ROUTES = { "/favicon.ico", "/eureka/css/**", "/eureka/js/**", "/eureka/fonts/**", "/eureka/images/**", "/actuator/health" };
+    static final String[] PUBLIC_ROUTES = { "/favicon.ico", "/eureka/css/**", "/eureka/js/**", "/eureka/fonts/**", "/eureka/images/**", "/actuator/health", "/actuator/health/liveness", "/actuator/health/readiness" };
 
     @Primary
     @Bean
