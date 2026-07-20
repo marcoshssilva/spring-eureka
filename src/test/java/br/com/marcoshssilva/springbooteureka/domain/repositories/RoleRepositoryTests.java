@@ -41,7 +41,7 @@ class RoleRepositoryTests {
 
         Set<Role> roles = roleRepository.findAllByUsername("tester");
         assertEquals(1, roles.size());
-        assertTrue(roles.stream().anyMatch(r -> r.getId().getAuthority().equals("ROLE_ADMIN")));
+        assertTrue(roles.stream().anyMatch(r -> r.getId().authority().equals("ROLE_ADMIN")));
     }
 
     @Test
