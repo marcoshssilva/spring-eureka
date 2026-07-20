@@ -1,6 +1,8 @@
 package br.com.marcoshssilva.springbooteureka.domain.tasks;
 
 import br.com.marcoshssilva.springbooteureka.controller.data.etc.UserRoles;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.User;
@@ -10,10 +12,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CompletableFuture;
 
-@lombok.RequiredArgsConstructor
-@lombok.extern.slf4j.Slf4j
 @Component
 public class InitMetricsUserIfNotExistsTask {
+    private static final Logger log = LoggerFactory.getLogger(InitMetricsUserIfNotExistsTask.class);
     private static final String DEFAULT_ROLE = UserRoles.METRICS.getAuthority();
 
     @Value("${eureka.instance.metadata-map.user.name}")
@@ -24,6 +25,11 @@ public class InitMetricsUserIfNotExistsTask {
 
     private final UserDetailsManager userDetailsManager;
     private final PasswordEncoder passwordEncoder;
+
+    public InitMetricsUserIfNotExistsTask(UserDetailsManager userDetailsManager, PasswordEncoder passwordEncoder) {
+        this.userDetailsManager = userDetailsManager;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Async
     public CompletableFuture<Void> executeTask() {

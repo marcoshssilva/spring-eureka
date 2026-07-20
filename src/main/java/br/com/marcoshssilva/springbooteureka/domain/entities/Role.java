@@ -8,9 +8,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
-@lombok.AllArgsConstructor
-@lombok.NoArgsConstructor
-@lombok.Data
 @Entity
 @Table(name = "authorities")
 public class Role implements Serializable {
@@ -19,6 +16,20 @@ public class Role implements Serializable {
 
     @EmbeddedId
     private RolePK id;
+
+    public Role() {}
+
+    public Role(RolePK id) {
+        this.id = id;
+    }
+
+    public RolePK getId() {
+        return id;
+    }
+
+    public void setId(RolePK id) {
+        this.id = id;
+    }
 
     @Override
     public boolean equals(Object o) {

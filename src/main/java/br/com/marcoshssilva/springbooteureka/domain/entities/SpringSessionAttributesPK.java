@@ -7,9 +7,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
-@lombok.AllArgsConstructor
-@lombok.NoArgsConstructor
-@lombok.Data
 @Embeddable
 public class SpringSessionAttributesPK implements Serializable {
     @Serial
@@ -20,6 +17,37 @@ public class SpringSessionAttributesPK implements Serializable {
 
     @Column(name = "ATTRIBUTE_NAME", length = 200, nullable = false)
     private String attributeName;
+
+    public SpringSessionAttributesPK() {}
+
+    public SpringSessionAttributesPK(String sessionPrimaryId, String attributeName) {
+        this.sessionPrimaryId = sessionPrimaryId;
+        this.attributeName = attributeName;
+    }
+
+    public String getSessionPrimaryId() {
+        return sessionPrimaryId;
+    }
+
+    public void setSessionPrimaryId(String sessionPrimaryId) {
+        this.sessionPrimaryId = sessionPrimaryId;
+    }
+
+    public String getAttributeName() {
+        return attributeName;
+    }
+
+    public void setAttributeName(String attributeName) {
+        this.attributeName = attributeName;
+    }
+
+    @Override
+    public String toString() {
+        return "SpringSessionAttributesPK{" +
+                "sessionPrimaryId='" + sessionPrimaryId + '\'' +
+                ", attributeName='" + attributeName + '\'' +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {

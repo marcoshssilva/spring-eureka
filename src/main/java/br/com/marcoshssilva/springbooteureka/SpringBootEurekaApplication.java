@@ -6,11 +6,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@lombok.RequiredArgsConstructor
 @SpringBootApplication
 public class SpringBootEurekaApplication implements CommandLineRunner {
 	private final InitSuperUserIfNotExistsTask initSuperUserIfNotExistsTask;
 	private final InitMetricsUserIfNotExistsTask initMetricsUserIfNotExistsTask;
+
+	public SpringBootEurekaApplication(InitSuperUserIfNotExistsTask initSuperUserIfNotExistsTask, InitMetricsUserIfNotExistsTask initMetricsUserIfNotExistsTask) {
+		this.initSuperUserIfNotExistsTask = initSuperUserIfNotExistsTask;
+		this.initMetricsUserIfNotExistsTask = initMetricsUserIfNotExistsTask;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootEurekaApplication.class, args);

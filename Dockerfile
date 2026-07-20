@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jre-focal AS java
+FROM eclipse-temurin:25-jre AS java
 
 USER root
 

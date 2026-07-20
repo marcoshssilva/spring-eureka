@@ -3,14 +3,32 @@ package br.com.marcoshssilva.springbooteureka.domain.entities;
 import jakarta.persistence.EmbeddedId;
 import java.util.Objects;
 
-@lombok.AllArgsConstructor
-@lombok.NoArgsConstructor
-@lombok.Data
 // @Entity
 // @Table(name = "group_members")
 public class MemberGroup {
     @EmbeddedId
     private MemberGroupPK id;
+
+    public MemberGroup() {}
+
+    public MemberGroup(MemberGroupPK id) {
+        this.id = id;
+    }
+
+    public MemberGroupPK getId() {
+        return id;
+    }
+
+    public void setId(MemberGroupPK id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "MemberGroup{" +
+                "id=" + id +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {

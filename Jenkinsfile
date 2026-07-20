@@ -1,4 +1,4 @@
-pipelineUsingJava17AndMaven('marcoshssilva/spring-eureka', 
+pipelineUsingJava25AndMaven('marcoshssilva/spring-eureka', 
                             [
                               'APP_NAME': 'spring-eureka', 
                               'DEPLOY': 'MAVEN', 

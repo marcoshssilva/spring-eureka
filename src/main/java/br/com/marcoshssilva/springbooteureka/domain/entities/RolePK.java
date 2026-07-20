@@ -6,9 +6,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
-@lombok.AllArgsConstructor
-@lombok.NoArgsConstructor
-@lombok.Data
 @Embeddable
 public class RolePK implements Serializable {
     @Serial
@@ -21,21 +18,44 @@ public class RolePK implements Serializable {
     @Column(name = "authority", nullable = false)
     private String authority;
 
+    public RolePK() {}
+
+    public RolePK(User user, String authority) {
+        this.user = user;
+        this.authority = authority;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RolePK rolePK = (RolePK) o;
-        return Objects.equals(user.getUsername(), rolePK.user.getUsername()) && Objects.equals(authority, rolePK.authority);
+        return Objects.equals(user != null ? user.getUsername() : null, rolePK.user != null ? rolePK.user.getUsername() : null) && Objects.equals(authority, rolePK.authority);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user.getUsername(), authority);
+        return Objects.hash(user != null ? user.getUsername() : null, authority);
     }
 
     @Override
     public String toString() {
-        return "RolePK{" + "username=" + user.getUsername() + ", authority='" + authority + '\'' + '}';
+        return "RolePK{" + "username=" + (user != null ? user.getUsername() : "null") + ", authority='" + authority + '\'' + '}';
     }
 }

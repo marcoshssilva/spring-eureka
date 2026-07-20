@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 
-@lombok.RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/admin")
 public class AdminController extends AbstractApiController {
     private final UserManagementService userManagementService;
+
+    public AdminController(UserManagementService userManagementService) {
+        this.userManagementService = userManagementService;
+    }
 
     @Transactional
     @PostMapping("/reset-password")

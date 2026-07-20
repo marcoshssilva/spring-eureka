@@ -7,9 +7,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
-@lombok.AllArgsConstructor
-@lombok.NoArgsConstructor
-@lombok.Data
 @Embeddable
 public class MemberGroupPK implements Serializable {
     @Serial private static final long serialVersionUID = 1L;
@@ -18,6 +15,37 @@ public class MemberGroupPK implements Serializable {
     private Long groupId;
     @Column(name = "username")
     private String username;
+
+    public MemberGroupPK() {}
+
+    public MemberGroupPK(Long groupId, String username) {
+        this.groupId = groupId;
+        this.username = username;
+    }
+
+    public Long getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public String toString() {
+        return "MemberGroupPK{" +
+                "groupId=" + groupId +
+                ", username='" + username + '\'' +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {

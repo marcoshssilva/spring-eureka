@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
-@lombok.AllArgsConstructor
-@lombok.NoArgsConstructor
-@lombok.Data
 // @Entity
 // @Table(name = "groups")
 public class Group {
@@ -16,6 +13,37 @@ public class Group {
 
     @Column(name = "group_name")
     private String groupName;
+
+    public Group() {}
+
+    public Group(Long id, String groupName) {
+        this.id = id;
+        this.groupName = groupName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    @Override
+    public String toString() {
+        return "Group{" +
+                "id=" + id +
+                ", groupName='" + groupName + '\'' +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {

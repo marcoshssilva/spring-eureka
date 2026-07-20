@@ -7,14 +7,16 @@ import br.com.marcoshssilva.springbooteureka.domain.tasks.InitMetricsUserIfNotEx
 import br.com.marcoshssilva.springbooteureka.domain.tasks.InitSuperUserIfNotExistsTask;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DataJpaTest
+@SpringBootTest
+@Transactional
 class RoleRepositoryTests {
 
     @Autowired
@@ -23,10 +25,10 @@ class RoleRepositoryTests {
     @Autowired
     private UserRepository userRepository;
 
-    @MockBean
+    @MockitoBean
     private InitSuperUserIfNotExistsTask initSuperUserIfNotExistsTask;
 
-    @MockBean
+    @MockitoBean
     private InitMetricsUserIfNotExistsTask initMetricsUserIfNotExistsTask;
 
     @Test

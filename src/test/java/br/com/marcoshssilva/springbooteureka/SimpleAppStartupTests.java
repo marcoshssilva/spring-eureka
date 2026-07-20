@@ -10,7 +10,7 @@ class SimpleAppStartupTests {
     @Test
     void runAppWithDefaultConfigs() {
         assertDoesNotThrow(() -> {
-            SpringBootEurekaApplication.main(new String[] {});
+            SpringBootEurekaApplication.main(new String[] {"--server.port=0", "--management.server.port=0"});
         });
     }
 }

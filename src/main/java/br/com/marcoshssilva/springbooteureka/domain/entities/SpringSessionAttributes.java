@@ -22,9 +22,6 @@ import java.util.Objects;
  * The foreign key to {@link SpringSession} is generated with {@code ON DELETE CASCADE} so that
  * deleting a session (which Spring Session does via plain JDBC) also removes its attribute rows.
  */
-@lombok.AllArgsConstructor
-@lombok.NoArgsConstructor
-@lombok.Data
 @Entity
 @Table(name = "SPRING_SESSION_ATTRIBUTES")
 public class SpringSessionAttributes implements Serializable {
@@ -43,6 +40,46 @@ public class SpringSessionAttributes implements Serializable {
     @Lob
     @Column(name = "ATTRIBUTE_BYTES", nullable = false)
     private byte[] attributeBytes;
+
+    public SpringSessionAttributes() {}
+
+    public SpringSessionAttributes(SpringSessionAttributesPK id, SpringSession session, byte[] attributeBytes) {
+        this.id = id;
+        this.session = session;
+        this.attributeBytes = attributeBytes;
+    }
+
+    public SpringSessionAttributesPK getId() {
+        return id;
+    }
+
+    public void setId(SpringSessionAttributesPK id) {
+        this.id = id;
+    }
+
+    public SpringSession getSession() {
+        return session;
+    }
+
+    public void setSession(SpringSession session) {
+        this.session = session;
+    }
+
+    public byte[] getAttributeBytes() {
+        return attributeBytes;
+    }
+
+    public void setAttributeBytes(byte[] attributeBytes) {
+        this.attributeBytes = attributeBytes;
+    }
+
+    @Override
+    public String toString() {
+        return "SpringSessionAttributes{" +
+                "id=" + id +
+                ", attributeBytes.length=" + (attributeBytes != null ? attributeBytes.length : "null") +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {

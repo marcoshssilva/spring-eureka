@@ -17,14 +17,15 @@ import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.sql.DataSource;
 
 @Configuration
 @EnableMethodSecurity()
 @EnableWebSecurity
-
-@lombok.extern.slf4j.Slf4j
 public class WebSecurityConfiguration {
+    private static final Logger log = LoggerFactory.getLogger(WebSecurityConfiguration.class);
     static final String ROLE_METRICS = "METRICS";
     static final String ROLE_ADMIN   = "ADMIN";
     static final String ROLE_READER  = "READER";

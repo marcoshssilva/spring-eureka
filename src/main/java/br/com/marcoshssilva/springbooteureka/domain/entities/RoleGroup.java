@@ -3,14 +3,32 @@ package br.com.marcoshssilva.springbooteureka.domain.entities;
 import jakarta.persistence.EmbeddedId;
 import java.util.Objects;
 
-@lombok.AllArgsConstructor
-@lombok.NoArgsConstructor
-@lombok.Data
 // @Entity
 // @Table(name = "group_authorities")
 public class RoleGroup {
     @EmbeddedId
     RoleGroupPK id;
+
+    public RoleGroup() {}
+
+    public RoleGroup(RoleGroupPK id) {
+        this.id = id;
+    }
+
+    public RoleGroupPK getId() {
+        return id;
+    }
+
+    public void setId(RoleGroupPK id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "RoleGroup{" +
+                "id=" + id +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {

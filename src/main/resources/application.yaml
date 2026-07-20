@@ -83,17 +83,13 @@ management:
       export:
         enabled: ${MANAGEMENT_OTLP_METRICS_EXPORT_ENABLED:true}
         url: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/metrics
-        batchSize: ${OTEL_EXPORTER_OTLP_BATCH_SIZE:100}
-        aggregationTemporality: ${OTEL_EXPORTER_OTLP_AGGREGATION_TEMPORALITY:cumulative}
-        step: ${OTEL_EXPORTER_OTLP_AGGREGATION_STEP:1m}
     tracing:
       endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/traces
-      export:
-        enabled: ${MANAGEMENT_OTLP_TRACING_EXPORT_ENABLED:true}
     logging:
       endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/logs
-      export:
-        enabled: ${MANAGEMENT_OTLP_LOGGING_EXPORT_ENABLED:true}
+logging:
+  otlp:
+    enabled: true
 #logging:
 #  level:
 #    com.netflix.eureka: OFF

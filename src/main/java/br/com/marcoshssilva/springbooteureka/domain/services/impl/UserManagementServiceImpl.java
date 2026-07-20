@@ -17,7 +17,6 @@ import java.util.stream.Stream;
 
 @Primary
 @Service
-@lombok.RequiredArgsConstructor
 public final class UserManagementServiceImpl implements UserManagementService {
     private static final String ROLE_PREFIX = "ROLE_";
     private static final String MSG_USERNAME_NOT_FOUND = "Username not found in database";
@@ -27,6 +26,12 @@ public final class UserManagementServiceImpl implements UserManagementService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+
+    public UserManagementServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public void resetPasswordFromUsername(final String username, final String newPassword) throws BusinessException {
