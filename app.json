@@ -11,14 +11,5 @@
             "description": "Actuator default port",
             "value": "8761"
         }
-    },
-    "healthchecks": {
-        "web": [
-            {
-                "type": "startup",
-                "path": "/actuator/health",
-                "port": 8761
-            }
-        ]
     }
 }
