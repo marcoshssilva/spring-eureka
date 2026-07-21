@@ -25,7 +25,7 @@ class RoleGroupTests {
         assertEquals(r1, r2);
         assertEquals(r1.hashCode(), r2.hashCode());
         assertNotEquals(r1, r3);
-        assertNotEquals(r1, null);
-        assertNotEquals(r1, "string");
+        assertNotEquals(null, r1);
+        assertNotEquals("string", r1);
     }
 }
