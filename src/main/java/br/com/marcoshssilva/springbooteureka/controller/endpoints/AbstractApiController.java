@@ -19,7 +19,7 @@ public abstract class AbstractApiController {
             return action.action();
         } catch (BusinessException e) {
             throw new BadRequestException(new SimpleStatusResponseBodyDto(e.getMessage(), StatusTypeResponse.ERROR));
-        } catch (Exception e) {
+        } catch (Exception _) {
             throw new InternalServerErrorException(new SimpleStatusResponseBodyDto(MSG_INTERNAL_SERVER_ERROR, StatusTypeResponse.ERROR));
         }
 
