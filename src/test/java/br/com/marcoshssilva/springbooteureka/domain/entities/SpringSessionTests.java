@@ -36,7 +36,7 @@ class SpringSessionTests {
         assertEquals(s1, s2);
         assertEquals(s1.hashCode(), s2.hashCode());
         assertNotEquals(s1, s3);
-        assertNotEquals(s1, null);
-        assertNotEquals(s1, "string");
+        assertNotEquals(null, s1);
+        assertNotEquals("string", s1);
     }
 }
