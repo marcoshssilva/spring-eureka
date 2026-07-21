@@ -53,12 +53,13 @@ public class WebSecurityConfiguration {
         http.csrf(csrf -> csrf.disable());
         http.authorizeHttpRequests(
                 httpRequestsConfigurer -> httpRequestsConfigurer
-                        .requestMatchers(PUBLIC_ROUTES).permitAll()
                         .requestMatchers(ALLOW_BY_ROLE_ADMIN).hasAnyRole(ROLE_ADMIN)
                         .requestMatchers(ALLOW_BY_ROLE_CLIENT).hasAnyRole(ROLE_CLIENT, ROLE_ADMIN)
                         .requestMatchers(ALLOW_BY_ROLE_METRICS).hasAnyRole(ROLE_METRICS, ROLE_ADMIN)
-                        // ONLY GET METHOD to ROLE_READER
+                        // ONLY GET METHOD allowed to ROLE_READER
                         .requestMatchers(HttpMethod.GET, ALLOW_BY_ROLE_CLIENT).hasAnyRole(ROLE_READER, ROLE_ADMIN)
+                        // ONLY GET METHOD allowed to ANYONE
+                        .requestMatchers(HttpMethod.GET, PUBLIC_ROUTES).permitAll()
                         .anyRequest().authenticated()
         );
         return http.build();
