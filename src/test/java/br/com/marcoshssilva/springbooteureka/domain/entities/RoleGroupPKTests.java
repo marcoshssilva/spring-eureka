@@ -21,7 +21,7 @@ class RoleGroupPKTests {
         assertEquals(pk1, pk2);
         assertEquals(pk1.hashCode(), pk2.hashCode());
         assertNotEquals(pk1, pk3);
-        assertNotEquals(pk1, null);
-        assertNotEquals(pk1, "string");
+        assertNotEquals(null, pk1);
+        assertNotEquals("string", pk1);
     }
 }
