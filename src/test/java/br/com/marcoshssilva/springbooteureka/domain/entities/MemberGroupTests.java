@@ -25,7 +25,7 @@ class MemberGroupTests {
         assertEquals(m1, m2);
         assertEquals(m1.hashCode(), m2.hashCode());
         assertNotEquals(m1, m3);
-        assertNotEquals(m1, null);
-        assertNotEquals(m1, "string");
+        assertNotEquals(null, m1);
+        assertNotEquals("string", m1);
     }
 }
