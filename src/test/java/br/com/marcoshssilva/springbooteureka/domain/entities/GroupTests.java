@@ -23,8 +23,8 @@ class GroupTests {
         assertEquals(g1, g2);
         assertEquals(g1.hashCode(), g2.hashCode());
         assertNotEquals(g1, g3);
-        assertNotEquals(g1, null);
-        assertNotEquals(g1, "string");
+        assertNotEquals(null, g1);
+        assertNotEquals("string", g1);
     }
 
     @Test
