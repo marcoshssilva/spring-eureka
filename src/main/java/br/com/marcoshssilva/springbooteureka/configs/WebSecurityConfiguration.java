@@ -5,6 +5,7 @@ import br.com.marcoshssilva.springbooteureka.domain.services.impl.CustomUserDeta
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,9 +30,8 @@ public class WebSecurityConfiguration {
 
     static final String[] ALLOW_BY_ROLE_METRICS = { "/actuator/**", "/actuator" };
     static final String[] ALLOW_BY_ROLE_CLIENT = { "/eureka/v2/apps", "/eureka/v2/apps/**" };
-    static final String[] ALLOW_BY_ROLE_READER = { "/", "/lastn" };
     static final String[] ALLOW_BY_ROLE_ADMIN  = { "/api/admin/**", "/h2-console/**" };
-    static final String[] PUBLIC_ROUTES = { "/favicon.ico", "/eureka/css/**", "/eureka/js/**", "/eureka/fonts/**", "/eureka/images/**", "/actuator/health", "/actuator/health/liveness", "/actuator/health/readiness" };
+    static final String[] PUBLIC_ROUTES = { "/", "/lastn", "/favicon.ico", "/eureka/css/**", "/eureka/js/**", "/eureka/fonts/**", "/eureka/images/**", "/actuator/health", "/actuator/health/liveness", "/actuator/health/readiness" };
 
     @Primary
     @Bean
@@ -42,7 +42,7 @@ public class WebSecurityConfiguration {
     @Primary
     @Bean
     public PasswordEncoder defaultPasswordEncoder() {
-        return new SCryptPasswordEncoder(16384, 8, 1, 32, 16);
+        return SCryptPasswordEncoder.defaultsForSpringSecurity_v5_8();
     }
 
     @Bean
@@ -56,8 +56,9 @@ public class WebSecurityConfiguration {
                         .requestMatchers(PUBLIC_ROUTES).permitAll()
                         .requestMatchers(ALLOW_BY_ROLE_ADMIN).hasAnyRole(ROLE_ADMIN)
                         .requestMatchers(ALLOW_BY_ROLE_CLIENT).hasAnyRole(ROLE_CLIENT, ROLE_ADMIN)
-                        .requestMatchers(ALLOW_BY_ROLE_READER).hasAnyRole(ROLE_READER, ROLE_ADMIN)
                         .requestMatchers(ALLOW_BY_ROLE_METRICS).hasAnyRole(ROLE_METRICS, ROLE_ADMIN)
+                        // ONLY GET METHOD to ROLE_READER
+                        .requestMatchers(HttpMethod.GET, ALLOW_BY_ROLE_CLIENT).hasAnyRole(ROLE_READER, ROLE_ADMIN)
                         .anyRequest().authenticated()
         );
         return http.build();
