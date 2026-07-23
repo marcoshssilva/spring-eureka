@@ -2,8 +2,6 @@ package com.github.marcoshssilva.eureka.controller.endpoints;
 
 import com.github.marcoshssilva.eureka.controller.data.requests.UserChangePasswordRequestBodyDto;
 import com.github.marcoshssilva.eureka.domain.services.UserManagementService;
-import com.github.marcoshssilva.eureka.domain.tasks.InitMetricsUserIfNotExistsTask;
-import com.github.marcoshssilva.eureka.domain.tasks.InitSuperUserIfNotExistsTask;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -27,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @ActiveProfiles("test")
+@WithMockUser(username = "admin", roles = "ADMIN")
 @Transactional
 class UserControllerTests {
 
@@ -44,19 +44,9 @@ class UserControllerTests {
     @Autowired
     private UserManagementService userManagementService;
 
-    @Autowired
-    private InitSuperUserIfNotExistsTask initSuperUserIfNotExistsTask;
-
-    @Autowired
-    private InitMetricsUserIfNotExistsTask initMetricsUserIfNotExistsTask;
-
     @BeforeEach
     void setup() throws Exception {
         mockMvc = MockMvcBuilders.webAppContextSetup(context).apply(springSecurity()).build();
-        // Ensure default users exist
-        initSuperUserIfNotExistsTask.executeTask().get();
-        initMetricsUserIfNotExistsTask.executeTask().get();
-        
         // Remove tester if exists to have a clean state for each test
         try {
             if (!userDetailsManager.userExists("tester")) {
