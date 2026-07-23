@@ -48,7 +48,7 @@ eureka:
     register-with-eureka: ${EUREKA_CLIENT_REGISTER_WITH_EUREKA:false}
     fetch-registry: ${EUREKA_CLIENT_FETCH_REGISTRY:false}
     serviceUrl:
-      defaultZone: ${EUREKA_CLIENT_SERVICE_URL:http://localhost:${server.port}/eureka/}
+      defaultZone: ${EUREKA_CLIENT_SERVICE_URL:http://admin:admin@localhost:${server.port}/eureka/}
 management:
   server:
     port: ${MANAGEMENT_PORT:8761}
@@ -76,7 +76,7 @@ management:
       show-values: always
     configprops:
       show-values: always
-#logging:
-#  level:
-#    com.netflix.eureka: OFF
-#    com.netflix.discovery: OFF
+logging:
+  level:
+    com.netflix.eureka: INFO
+    com.netflix.discovery: INFO
