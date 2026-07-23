@@ -59,7 +59,10 @@ class UserControllerTests {
         
         // Remove tester if exists to have a clean state for each test
         try {
-            userManagementService.deleteUser("tester");
+            if (!userDetailsManager.userExists("tester")) {
+                // Create user with known password
+                userManagementService.createUser("tester", "oldPass", true, new String[]{"CLIENT"});
+            }
         } catch (Exception _) {
             // Ignored: user might not exist
         }
@@ -67,9 +70,6 @@ class UserControllerTests {
 
     @Test
     void testChangePassword() throws Exception {
-        // Create user with known password
-        userManagementService.createUser("tester", "oldPass", true, new String[]{"CLIENT"});
-
         UserDetails userDetails = userDetailsManager.loadUserByUsername("tester");
 
         UserChangePasswordRequestBodyDto body = new UserChangePasswordRequestBodyDto("newPass", "oldPass");
@@ -85,9 +85,6 @@ class UserControllerTests {
 
     @Test
     void testChangePassword_WrongOldPassword() throws Exception {
-        // Create user with known password
-        userManagementService.createUser("tester", "oldPass", true, new String[]{"CLIENT"});
-
         UserDetails userDetails = userDetailsManager.loadUserByUsername("tester");
 
         UserChangePasswordRequestBodyDto body = new UserChangePasswordRequestBodyDto("newPass", "wrongOldPass");
