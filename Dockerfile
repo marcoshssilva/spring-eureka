@@ -4,6 +4,9 @@ USER root
 
 WORKDIR /app
 COPY --chmod=644 --chown=root:root ./target/spring-eureka-*.jar app.jar
+RUN mkdir "/app/data" && \
+    chmod 755 -R /app/data && \
+    chown 1001:1001 -R /app/data
 
 USER 1001
 
