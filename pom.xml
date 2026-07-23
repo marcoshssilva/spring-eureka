@@ -8,10 +8,10 @@
 		<version>4.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com.marcoshssilva</groupId>
-	<artifactId>spring-boot-eureka</artifactId>
-	<version>1.1.0-RC-SNAPSHOT</version>
-	<name>spring-boot-eureka</name>
+	<groupId>com.github.marcoshssilva</groupId>
+	<artifactId>spring-eureka</artifactId>
+	<version>0.1.0-RC-SNAPSHOT</version>
+	<name>spring-eureka</name>
 	<description>Eureka service discovery to Spring Boot Apps and supported as NodeJS, Quarkus, Micrometer or FastAPI</description>
 	<properties>
 		<java.version>25</java.version>
@@ -135,8 +135,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-				</configuration>
+				<configuration></configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
@@ -164,8 +163,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-				</configuration>
+				<configuration></configuration>
 			</plugin>
 		</plugins>
 	</build>
