@@ -2,7 +2,9 @@ package com.github.marcoshssilva.eureka.controller.data.responses;
 
 import com.github.marcoshssilva.eureka.controller.data.etc.StatusTypeResponse;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class SimpleStatusResponseBodyDtoTests {
     @Test
