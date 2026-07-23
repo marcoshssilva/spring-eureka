@@ -2,7 +2,6 @@ package com.github.marcoshssilva.eureka.controller.endpoints;
 
 import com.github.marcoshssilva.eureka.controller.data.etc.StatusTypeResponse;
 import com.github.marcoshssilva.eureka.controller.data.etc.UserRoles;
-import br.com.marcoshssilva.springbooteureka.controller.data.requests.*;
 import com.github.marcoshssilva.eureka.controller.data.requests.AdminCreateUserRequestBodyDto;
 import com.github.marcoshssilva.eureka.controller.data.requests.AdminResetPasswordRequestBodyDto;
 import com.github.marcoshssilva.eureka.controller.data.requests.AdminUpdateUserRequestBodyDto;
