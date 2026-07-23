@@ -1,7 +1,11 @@
 package com.github.marcoshssilva.eureka.controller.data.requests;
 
 import com.github.marcoshssilva.eureka.controller.data.etc.UserRoles;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.util.Arrays;
