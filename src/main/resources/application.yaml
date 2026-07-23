@@ -1,6 +1,8 @@
 spring:
   application:
     name: ${APP_NAME:spring-eureka}
+  profiles:
+    default: ${SPRING_PROFILES_ACTIVE:opentelemetry}
   cache:
     type: caffeine
     caffeine:
@@ -74,22 +76,6 @@ management:
       show-values: always
     configprops:
       show-values: always
-  tracing:
-    enabled: ${MANAGEMENT_TRACING_ENABLED:true}
-    sampling:
-      probability: ${MANAGEMENT_TRACING_SAMPLING_PROBABILITY:1.0}
-  otlp:
-    metrics:
-      export:
-        enabled: ${MANAGEMENT_OTLP_METRICS_EXPORT_ENABLED:true}
-        url: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/metrics
-    tracing:
-      endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/traces
-    logging:
-      endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318}/v1/logs
-logging:
-  otlp:
-    enabled: true
 #logging:
 #  level:
 #    com.netflix.eureka: OFF

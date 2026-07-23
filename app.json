@@ -5,7 +5,7 @@
     "env": {
         "PORT": {
             "description": "Application default port",
-            "value": "5000"
+            "value": "8761"
         },
         "MANAGEMENT_PORT": {
             "description": "Actuator default port",
