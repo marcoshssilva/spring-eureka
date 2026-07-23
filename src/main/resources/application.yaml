@@ -37,7 +37,7 @@ eureka:
   server:
     peer-node-read-timeout-ms: 3000
   instance:
-    leaseRenewalIntervalInSeconds: 30
+    leaseRenewalIntervalInSeconds: ${EUREKA_INSTANCE_LEASE_RENEWAL_INTERVAL_IN_SECONDS:30}
     health-check-url-path: /actuator/health
     preferIpAddress: ${EUREKA_INSTANCE_PREFER_IP_ADDRESS:false}
     metadata-map:
