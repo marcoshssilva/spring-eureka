@@ -15,6 +15,7 @@ services:
     environment:
       OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4318
       JAVA_VM_OPTIONS: "-Xmx512m -Xms256m"
+      SPRING_PROFILES_ACTIVE: "opentelemetry"
     depends_on:
       - otel-collector
   otel-collector:
