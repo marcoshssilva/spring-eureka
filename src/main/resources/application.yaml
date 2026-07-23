@@ -44,7 +44,7 @@ eureka:
       user.name: ${SPRING_REGISTER_METRICS_USERNAME:metrics}
       user.password: ${SPRING_REGISTER_METRICS_PASSWORD:changeit}
   client:
-    enabled: true
+    enabled: ${EUREKA_CLIENT_ENABLED:true}
     registryFetchIntervalSeconds: ${EUREKA_CLIENT_FETCH_REGISTRY_INTERVAL_SECONDS:180}
     register-with-eureka: ${EUREKA_CLIENT_REGISTER_WITH_EUREKA:false}
     fetch-registry: ${EUREKA_CLIENT_FETCH_REGISTRY:false}
