@@ -27,12 +27,12 @@ spring:
     properties:
       dialect: org.hibernate.dialect.H2Dialect
 server:
-  port: 5000
+  port: 8761
   servlet:
     context-path: /
 eureka:
-  datacenter: 'local'
-  environment: 'test'
+  datacenter: 'LOCAL'
+  environment: 'TEST'
   server:
     peer-node-read-timeout-ms: 3000
   instance:
@@ -70,26 +70,6 @@ management:
       show-values: when_authorized
     env:
       show-values: when_authorized
-  tracing:
-    enabled: false
-    sampling:
-      probability: 1.0
-  otlp:
-    metrics:
-      export:
-        enabled: false
-        url: http://localhost:4318/v1/metrics
-        batchSize: 10000
-        aggregationTemporality: cumulative
-        step: 1m
-    tracing:
-      endpoint: http://localhost:4318/v1/traces
-      export:
-        enabled: false
-    logging:
-      endpoint: http://localhost:4318/v1/logs
-      export:
-        enabled: false
 logging:
   level:
     com.netflix.eureka: OFF
